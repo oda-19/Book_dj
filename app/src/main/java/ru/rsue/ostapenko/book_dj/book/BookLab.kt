@@ -8,7 +8,7 @@ import ru.rsue.ostapenko.book_dj.api.Connection.booksApi
 import java.util.*
 
 class BookLab private constructor(context: Context) {
-    val books = mutableListOf<Book>()
+    val books = mutableListOf<Books>()
 
     companion object {
         private var INSTANCE: BookLab? = null
@@ -19,7 +19,7 @@ class BookLab private constructor(context: Context) {
         }
     }
 
-    fun getBook(id: Int): Book? {
+    fun getBook(id: Int): Books? {
         for (book in books) {
             if (book.id == id) {
                 return book
@@ -28,13 +28,13 @@ class BookLab private constructor(context: Context) {
         return null
     }
 
-    fun addBook(book: Book){
+    fun addBook(book: Books){
         books.add(book)
     }
 
     init {
-        booksApi.getBooks().enqueue(object : Callback<List<Book>> {
-            override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
+        booksApi.getBooks().enqueue(object : Callback<List<Books>> {
+            override fun onResponse(call: Call<List<Books>>, response: Response<List<Books>>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         books.addAll(it)
@@ -42,7 +42,7 @@ class BookLab private constructor(context: Context) {
                 }
             }
 
-            override fun onFailure(call: Call<List<Book>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Books>>, t: Throwable) {
                 println("Ошибка")
             }
         })

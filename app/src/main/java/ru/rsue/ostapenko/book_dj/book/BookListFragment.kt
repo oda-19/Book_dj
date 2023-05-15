@@ -68,12 +68,12 @@ class BookListFragment : Fragment() {
         var book_author: TextView =
             itemView!!.findViewById(R.id.book_author)
 
-        private lateinit var book: Book
-        fun bindBook(book: Book) {
+        private lateinit var book: Books
+        fun bindBook(book: Books) {
             this.book = book
             //book_id.text = book.id.toString()
             book_title.text = book.title
-            book_author.text = book.authorId
+            book_author.text = book.author
             itemView.setOnClickListener(this)
         }
 
@@ -85,9 +85,9 @@ class BookListFragment : Fragment() {
 
     }
 
-    private class BookAdapter(books: List<Book>?) :
+    private class BookAdapter(books: List<Books>?) :
         RecyclerView.Adapter<BookHolder?>() {
-        private var books: List<Book>? = null
+        private var books: List<Books>? = null
         init {
             this.books = books
         }

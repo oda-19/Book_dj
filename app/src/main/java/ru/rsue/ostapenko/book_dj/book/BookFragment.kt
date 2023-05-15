@@ -25,7 +25,7 @@ class BookFragment : Fragment() {
             }
     }
 
-    private var book: Book? = null
+    private var book: Books? = null
     private lateinit var code_update: EditText
     private lateinit var title_update: EditText
     private lateinit var authorId_update: EditText

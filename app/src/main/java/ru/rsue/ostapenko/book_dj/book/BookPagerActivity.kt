@@ -12,12 +12,12 @@ import java.util.*
 
 class BookPagerActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
-    private lateinit var books: List<Book>
+    private lateinit var books: List<Books>
 
     companion object {
         private const val EXTRA_BOOK_ID =
             "ru.rsue.android.ostapenko.book_dj.book_id"
-        fun newIntent(packageContext: Context?, bookId: UUID?) = Intent(
+        fun newIntent(packageContext: Context?, bookId: Int?) = Intent(
             packageContext,
             BookPagerActivity::class.java
         ).apply {
@@ -45,7 +45,7 @@ class BookPagerActivity : AppCompatActivity() {
 
     private class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
         FragmentStateAdapter(fragmentActivity) {
-        private val books: List<Book> =
+        private val books: List<Books> =
             BookLab.get(fragmentActivity).books
         override fun getItemCount() = books.size
         override fun createFragment(position: Int) =

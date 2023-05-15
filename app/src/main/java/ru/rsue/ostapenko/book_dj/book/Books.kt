@@ -1,10 +1,6 @@
 package ru.rsue.ostapenko.book_dj.book
 
-import java.util.*
-
-import java.util.Date
-
-data class Book(
+data class Books(
     var id: Int = -1,
     var author: String = "",
     var publish: String = "",
