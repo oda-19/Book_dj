@@ -17,7 +17,7 @@ class BookFragment : Fragment() {
     companion object {
         private const val ARG_BOOK_ID = "book_id"
 
-        fun newInstance(bookId: UUID?) =
+        fun newInstance(bookId: Int) =
             BookFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_BOOK_ID, bookId)
@@ -38,9 +38,8 @@ class BookFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super. onCreate(savedInstanceState)
-        val bookId = requireArguments().getSerializable(ARG_BOOK_ID) as
-                UUID?
-        book = BookLab.get(requireActivity()).getBook(bookId as UUID)
+        val bookId = requireArguments().getSerializable(ARG_BOOK_ID) as Int
+        book = BookLab.get(requireActivity()).getBook(bookId)
 
     }
 
@@ -80,7 +79,7 @@ class BookFragment : Fragment() {
         })
 
         authorId_update = v.findViewById(R.id.authorId_update)
-        authorId_update.setText(book?.authorId)
+        authorId_update.setText(book?.author)
         authorId_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence, start: Int, count: Int, after: Int) {
@@ -88,7 +87,7 @@ class BookFragment : Fragment() {
             }
             override fun onTextChanged(
                 s: CharSequence, start: Int, before: Int, count: Int) {
-                book?.authorId = s.toString()
+                book?.author = s.toString()
             }
             override fun afterTextChanged(c: Editable) {
                 // И здесь тоже
@@ -96,7 +95,7 @@ class BookFragment : Fragment() {
         })
 
         publishId_update = v.findViewById(R.id.publishId_update)
-        publishId_update.setText(book?.publishId)
+        publishId_update.setText(book?.publish)
         publishId_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence, start: Int, count: Int, after: Int) {
@@ -104,7 +103,7 @@ class BookFragment : Fragment() {
             }
             override fun onTextChanged(
                 s: CharSequence, start: Int, before: Int, count: Int) {
-                book?.publishId = s.toString()
+                book?.publish = s.toString()
             }
             override fun afterTextChanged(c: Editable) {
                 // И здесь тоже
@@ -112,7 +111,7 @@ class BookFragment : Fragment() {
         })
 
         yearPublish_update = v.findViewById(R.id.yearPublish_update)
-        yearPublish_update.setText(book?.yearPublish)
+        book?.let { yearPublish_update.setText(it.yearPublish) }
         yearPublish_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence, start: Int, count: Int, after: Int) {
@@ -120,7 +119,7 @@ class BookFragment : Fragment() {
             }
             override fun onTextChanged(
                 s: CharSequence, start: Int, before: Int, count: Int) {
-                book?.yearPublish = s.toString()
+                book?.yearPublish = s.toString().toInt()
             }
             override fun afterTextChanged(c: Editable) {
                 // И здесь тоже
@@ -128,7 +127,7 @@ class BookFragment : Fragment() {
         })
 
         countPage_update = v.findViewById(R.id.countPage_update)
-        countPage_update.setText(book?.countPage)
+        countPage_update.setText(book?.countPage ?: 0)
         countPage_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence, start: Int, count: Int, after: Int) {
@@ -136,7 +135,7 @@ class BookFragment : Fragment() {
             }
             override fun onTextChanged(
                 s: CharSequence, start: Int, before: Int, count: Int) {
-                book?.countPage = s.toString()
+                book?.countPage = s.toString().toInt()
             }
             override fun afterTextChanged(c: Editable) {
                 // И здесь тоже
