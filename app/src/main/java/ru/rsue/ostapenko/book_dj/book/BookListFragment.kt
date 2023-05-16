@@ -21,7 +21,7 @@ class BookListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(
-            R.layout.fragment_list_book, container,
+            R.layout.fragment_list, container,
             false
         )
         recyclerView = view

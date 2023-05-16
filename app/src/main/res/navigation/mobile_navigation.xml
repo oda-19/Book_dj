@@ -9,17 +9,17 @@
         android:id="@+id/nav_book"
         android:name="ru.rsue.ostapenko.book_dj.book.BookListFragment"
         android:label="Книги"
-        tools:layout="@layout/fragment_list_book" />
+        tools:layout="@layout/fragment_list" />
 
     <fragment
         android:id="@+id/nav_author"
         android:name="ru.rsue.ostapenko.book_dj.author.AuthorListFragment"
         android:label="Авторы"
-        tools:layout="@layout/fragment_list_author" />
+        tools:layout="@layout/fragment_list" />
 
     <fragment
         android:id="@+id/nav_publisher"
         android:name="ru.rsue.ostapenko.book_dj.publisher.PublisherListFragment"
         android:label="Издательства"
-        tools:layout="@layout/fragment_list_publisher" />
+        tools:layout="@layout/fragment_list" />
 </navigation>
