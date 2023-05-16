@@ -22,6 +22,7 @@ class BookLab private constructor(context: Context) {
     fun getBook(id: Int): Books? {
         for (book in books) {
             if (book.id == id) {
+                Thread.sleep(100)
                 return book
             }
         }

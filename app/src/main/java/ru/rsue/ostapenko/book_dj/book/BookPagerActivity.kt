@@ -29,7 +29,7 @@ class BookPagerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_pager)
         val bookId = intent
-            .getSerializableExtra(EXTRA_BOOK_ID) as UUID?
+            .getSerializableExtra(EXTRA_BOOK_ID) as Int?
 
         viewPager = findViewById(R.id.activity_book_pager_view_pager)
         viewPager.adapter = ViewPagerAdapter(this)
