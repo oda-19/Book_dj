@@ -3,8 +3,8 @@ package ru.rsue.ostapenko.book_dj.book
 // Модель Книги
 data class Books(
     var id: Int = -1,
-    var author: String = "",
-    var publish: String = "",
+    var authorId: Int = 0,
+    var publishId: Int = 0,
     var title: String  = "",
     var code: String = "",
     var yearPublish: Int = 0,

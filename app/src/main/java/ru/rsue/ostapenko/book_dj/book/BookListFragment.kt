@@ -12,9 +12,9 @@ import ru.rsue.ostapenko.book_dj.R
 
 // Отображение данных в списке
 class BookListFragment : Fragment() {
-    private var recyclerView: RecyclerView? = null
+    private var bookRecyclerView: RecyclerView? = null
     private var adapter: BookAdapter? = null
-    lateinit var add_button: FloatingActionButton
+    lateinit var add_book_button: FloatingActionButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,15 +24,15 @@ class BookListFragment : Fragment() {
             R.layout.fragment_list_book, container,
             false
         )
-        recyclerView = view
-            .findViewById(R.id.recyclerView)
-        recyclerView!!.layoutManager = LinearLayoutManager(activity)
+        bookRecyclerView = view
+            .findViewById(R.id.recyclerView_book)
+        bookRecyclerView!!.layoutManager = LinearLayoutManager(activity)
         updateUI()
 
 
-        add_button = view
+        add_book_button = view
             .findViewById(R.id.floatingActionButton_add)
-        add_button.setOnClickListener(object: View.OnClickListener {
+        add_book_button.setOnClickListener(object: View.OnClickListener {
             override fun onClick(view: View): Unit {
                 // Handler code here.
                 val intent = Intent(context, BookAddActivity::class.java);
@@ -46,10 +46,10 @@ class BookListFragment : Fragment() {
         val bookLab = BookLab.get(requireActivity())
         val books = bookLab.books
         adapter = BookAdapter(books)
-        recyclerView!!.adapter = adapter
+        bookRecyclerView!!.adapter = adapter
         if (adapter == null) {
             adapter = BookAdapter(books)
-            recyclerView!!.adapter = adapter
+            bookRecyclerView!!.adapter = adapter
         }
         else
             adapter!!.notifyDataSetChanged()
@@ -73,7 +73,7 @@ class BookListFragment : Fragment() {
             this.book = book
             book_id.text = book.id.toString()
             book_title.text = book.title
-            book_author.text = book.author
+            book_author.text = book.authorId.toString()
             itemView.setOnClickListener(this)
         }
 

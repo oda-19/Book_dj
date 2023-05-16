@@ -11,7 +11,6 @@ import android.widget.CompoundButton
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import ru.rsue.ostapenko.book_dj.R
-import java.util.*
 
 // Контроллер, взаимодействующий с объектами модели и представления
 class BookFragment : Fragment() {
@@ -80,7 +79,8 @@ class BookFragment : Fragment() {
         })
 
         authorId_update = v.findViewById(R.id.authorId_update)
-        authorId_update.setText(book?.author)
+        var authorId = book?.authorId.toString()
+        authorId_update.setText(authorId)
         authorId_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence, start: Int, count: Int, after: Int) {
@@ -88,7 +88,7 @@ class BookFragment : Fragment() {
             }
             override fun onTextChanged(
                 s: CharSequence, start: Int, before: Int, count: Int) {
-                book?.author = s.toString()
+                book?.authorId = s.toString().toInt()
             }
             override fun afterTextChanged(c: Editable) {
                 // И здесь тоже
@@ -96,7 +96,8 @@ class BookFragment : Fragment() {
         })
 
         publishId_update = v.findViewById(R.id.publishId_update)
-        publishId_update.setText(book?.publish)
+        var publishId = book?.publishId.toString()
+        publishId_update.setText(publishId)
         publishId_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence, start: Int, count: Int, after: Int) {
@@ -104,7 +105,7 @@ class BookFragment : Fragment() {
             }
             override fun onTextChanged(
                 s: CharSequence, start: Int, before: Int, count: Int) {
-                book?.publish = s.toString()
+                book?.publishId = s.toString().toInt()
             }
             override fun afterTextChanged(c: Editable) {
                 // И здесь тоже

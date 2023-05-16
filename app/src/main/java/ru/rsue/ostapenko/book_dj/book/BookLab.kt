@@ -16,6 +16,8 @@ class BookLab private constructor(context: Context) {
         fun get(context: Context): BookLab {
             if (INSTANCE == null)
                 INSTANCE = BookLab(context)
+            else
+                INSTANCE!!.update_add_books()
             return INSTANCE!!
         }
     }
@@ -35,9 +37,15 @@ class BookLab private constructor(context: Context) {
     }
 
     init {
+        update_add_books()
+
+    }
+
+    fun update_add_books() {
         booksApi.getBooks().enqueue(object : Callback<List<Books>> {
             override fun onResponse(call: Call<List<Books>>, response: Response<List<Books>>) {
                 if (response.isSuccessful) {
+                    books.clear()
                     response.body()?.let {
                         books.addAll(it)
                     }
@@ -48,7 +56,5 @@ class BookLab private constructor(context: Context) {
                 println("Ошибка")
             }
         })
-
     }
-
 }

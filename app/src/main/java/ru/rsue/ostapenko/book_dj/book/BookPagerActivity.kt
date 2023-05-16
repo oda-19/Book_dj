@@ -36,7 +36,7 @@ class BookPagerActivity : AppCompatActivity() {
 
         books = BookLab.get(this).books
         for (i in books.indices)
-            if (books[i].id == 0) {
+            if (books[i].id == bookId) {
                 viewPager.currentItem = i
                 break
             }

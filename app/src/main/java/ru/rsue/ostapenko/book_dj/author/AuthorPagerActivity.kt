@@ -36,7 +36,7 @@ class AuthorPagerActivity : AppCompatActivity() {
 
         authors = AuthorLab.get(this).authors
         for (i in authors.indices)
-            if (authors[i].id == 0) {
+            if (authors[i].id == authorId) {
                 viewPager.currentItem = i
                 break
             }

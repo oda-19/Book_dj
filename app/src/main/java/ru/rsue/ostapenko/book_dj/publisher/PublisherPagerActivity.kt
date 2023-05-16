@@ -36,7 +36,7 @@ class PublisherPagerActivity : AppCompatActivity() {
 
         publishers = PublisherLab.get(this).publishers
         for (i in publishers.indices)
-            if (publishers[i].id == 0) {
+            if (publishers[i].id == publisherId) {
                 viewPager.currentItem = i
                 break
             }
