@@ -1,4 +1,4 @@
-package ru.rsue.ostapenko.book_dj.book
+package ru.rsue.ostapenko.book_dj.author
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,9 +11,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.rsue.ostapenko.book_dj.R
 
 // Отображение данных в списке
-class BookListFragment : Fragment() {
+class AuthorListFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
-    private var adapter: BookAdapter? = null
+    private var adapter: AuthorAdapter? = null
     lateinit var add_button: FloatingActionButton
 
     override fun onCreateView(
@@ -21,7 +21,7 @@ class BookListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(
-            R.layout.fragment_list_book, container,
+            R.layout.fragment_list_author, container,
             false
         )
         recyclerView = view
@@ -35,7 +35,7 @@ class BookListFragment : Fragment() {
         add_button.setOnClickListener(object: View.OnClickListener {
             override fun onClick(view: View): Unit {
                 // Handler code here.
-                val intent = Intent(context, BookAddActivity::class.java);
+                val intent = Intent(context, AuthorAddActivity::class.java);
                 startActivity(intent);
             }
         })
@@ -43,12 +43,12 @@ class BookListFragment : Fragment() {
     }
 
     private fun updateUI() {
-        val bookLab = BookLab.get(requireActivity())
-        val books = bookLab.books
-        adapter = BookAdapter(books)
+        val authorLab = AuthorLab.get(requireActivity())
+        val authors = authorLab.authors
+        adapter = AuthorAdapter(authors)
         recyclerView!!.adapter = adapter
         if (adapter == null) {
-            adapter = BookAdapter(books)
+            adapter = AuthorAdapter(authors)
             recyclerView!!.adapter = adapter
         }
         else
@@ -60,51 +60,51 @@ class BookListFragment : Fragment() {
         updateUI()
     }
 
-    private class BookHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
-        var book_id: TextView =
-            itemView!!.findViewById(R.id.book_id)
-        var book_title: TextView =
-            itemView!!.findViewById(R.id.book_title)
-        var book_author: TextView =
-            itemView!!.findViewById(R.id.book_author)
+    private class AuthorHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
+        var author_id: TextView =
+            itemView!!.findViewById(R.id.author_id)
+        var author_firstName: TextView =
+            itemView!!.findViewById(R.id.author_firstName)
+        var author_lastName: TextView =
+            itemView!!.findViewById(R.id.author_lastName)
 
-        private lateinit var book: Books
-        fun bindBook(book: Books) {
-            this.book = book
-            book_id.text = book.id.toString()
-            book_title.text = book.title
-            book_author.text = book.author
+        private lateinit var author: Authors
+        fun bindAuthor(author: Authors) {
+            this.author = author
+            author_id.text = author.id.toString()
+            author_firstName.text = author.firstName
+            author_lastName.text = author.lastName
             itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
             val context = v!!.context
-            val intent = BookPagerActivity.newIntent(context, book.id)
+            val intent = AuthorPagerActivity.newIntent(context, author.id)
             context.startActivity(intent)
         }
 
     }
 
-    private class BookAdapter(books: List<Books>?) :
-        RecyclerView.Adapter<BookHolder?>() {
-        private var books: List<Books>? = null
+    private class AuthorAdapter(authors: List<Authors>?) :
+        RecyclerView.Adapter<AuthorHolder?>() {
+        private var authors: List<Authors>? = null
         init {
-            this.books = books
+            this.authors = authors
         }
         override fun onCreateViewHolder(parent: ViewGroup,
-                                        viewType: Int): BookHolder {
+                                        viewType: Int): AuthorHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val view = layoutInflater
-                .inflate(R.layout.item_book, parent, false)
-            return BookHolder(view)
+                .inflate(R.layout.item_author, parent, false)
+            return AuthorHolder(view)
         }
-        override fun onBindViewHolder(holder: BookHolder,
+        override fun onBindViewHolder(holder: AuthorHolder,
                                       position: Int) {
-            val book = books!![position]
-            holder.bindBook(book)
+            val author = authors!![position]
+            holder.bindAuthor(author)
         }
         override fun getItemCount(): Int {
-            return books!!.size
+            return authors!!.size
         }
     }
 

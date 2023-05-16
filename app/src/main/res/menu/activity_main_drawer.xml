@@ -13,8 +13,8 @@
             android:icon="@drawable/inc_author"
             android:title="Авторы" />
         <item
-            android:id="@+id/nav_publishhouse"
-            android:icon="@drawable/inc_publishhouse"
+            android:id="@+id/nav_publisher"
+            android:icon="@drawable/inc_publisher"
             android:title="Издательства" />
     </group>
 </menu>

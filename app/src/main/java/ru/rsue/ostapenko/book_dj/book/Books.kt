@@ -1,5 +1,6 @@
 package ru.rsue.ostapenko.book_dj.book
 
+// Модель Книги
 data class Books(
     var id: Int = -1,
     var author: String = "",

@@ -8,8 +8,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import ru.rsue.ostapenko.book_dj.R
-import java.util.*
 
+// Листание данных между активностями
 class BookPagerActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var books: List<Books>
@@ -27,11 +27,11 @@ class BookPagerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_book_pager)
+        setContentView(R.layout.activity_pager_book)
         val bookId = intent
             .getSerializableExtra(EXTRA_BOOK_ID) as Int?
 
-        viewPager = findViewById(R.id.activity_book_pager_view_pager)
+        viewPager = findViewById(R.id.activity_pager_book_view_pager)
         viewPager.adapter = ViewPagerAdapter(this)
 
         books = BookLab.get(this).books

@@ -10,4 +10,6 @@ object Connection {
         .build()
 
     val booksApi = retrofit.create(BooksApi::class.java)
+    val authorsApi = retrofit.create(AuthorsApi::class.java)
+    val publishersApi = retrofit.create(PublishersApi::class.java)
 }

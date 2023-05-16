@@ -1,4 +1,4 @@
-package ru.rsue.ostapenko.book_dj.book
+package ru.rsue.ostapenko.book_dj.publisher
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,9 +11,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.rsue.ostapenko.book_dj.R
 
 // Отображение данных в списке
-class BookListFragment : Fragment() {
+class PublisherListFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
-    private var adapter: BookAdapter? = null
+    private var adapter: PublisherAdapter? = null
     lateinit var add_button: FloatingActionButton
 
     override fun onCreateView(
@@ -21,7 +21,7 @@ class BookListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(
-            R.layout.fragment_list_book, container,
+            R.layout.fragment_list_publisher, container,
             false
         )
         recyclerView = view
@@ -35,7 +35,7 @@ class BookListFragment : Fragment() {
         add_button.setOnClickListener(object: View.OnClickListener {
             override fun onClick(view: View): Unit {
                 // Handler code here.
-                val intent = Intent(context, BookAddActivity::class.java);
+                val intent = Intent(context, PublisherAddActivity::class.java);
                 startActivity(intent);
             }
         })
@@ -43,12 +43,12 @@ class BookListFragment : Fragment() {
     }
 
     private fun updateUI() {
-        val bookLab = BookLab.get(requireActivity())
-        val books = bookLab.books
-        adapter = BookAdapter(books)
+        val publisherLab = PublisherLab.get(requireActivity())
+        val publishers = publisherLab.publishers
+        adapter = PublisherAdapter(publishers)
         recyclerView!!.adapter = adapter
         if (adapter == null) {
-            adapter = BookAdapter(books)
+            adapter = PublisherAdapter(publishers)
             recyclerView!!.adapter = adapter
         }
         else
@@ -60,51 +60,51 @@ class BookListFragment : Fragment() {
         updateUI()
     }
 
-    private class BookHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
-        var book_id: TextView =
-            itemView!!.findViewById(R.id.book_id)
-        var book_title: TextView =
-            itemView!!.findViewById(R.id.book_title)
-        var book_author: TextView =
-            itemView!!.findViewById(R.id.book_author)
+    private class PublisherHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
+        var publisher_id: TextView =
+            itemView!!.findViewById(R.id.publisher_id)
+        var publisher_namePublisher: TextView =
+            itemView!!.findViewById(R.id.publisher_namePublisher)
+        var publisher_address: TextView =
+            itemView!!.findViewById(R.id.publisher_address)
 
-        private lateinit var book: Books
-        fun bindBook(book: Books) {
-            this.book = book
-            book_id.text = book.id.toString()
-            book_title.text = book.title
-            book_author.text = book.author
+        private lateinit var publisher: Publishers
+        fun bindPublisher(publisher: Publishers) {
+            this.publisher = publisher
+            publisher_id.text = publisher.id.toString()
+            publisher_namePublisher.text = publisher.namePublisher
+            publisher_address.text = publisher.address
             itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
             val context = v!!.context
-            val intent = BookPagerActivity.newIntent(context, book.id)
+            val intent = PublisherPagerActivity.newIntent(context, publisher.id)
             context.startActivity(intent)
         }
 
     }
 
-    private class BookAdapter(books: List<Books>?) :
-        RecyclerView.Adapter<BookHolder?>() {
-        private var books: List<Books>? = null
+    private class PublisherAdapter(publishers: List<Publishers>?) :
+        RecyclerView.Adapter<PublisherHolder?>() {
+        private var publishers: List<Publishers>? = null
         init {
-            this.books = books
+            this.publishers = publishers
         }
         override fun onCreateViewHolder(parent: ViewGroup,
-                                        viewType: Int): BookHolder {
+                                        viewType: Int): PublisherHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val view = layoutInflater
-                .inflate(R.layout.item_book, parent, false)
-            return BookHolder(view)
+                .inflate(R.layout.item_publisher, parent, false)
+            return PublisherHolder(view)
         }
-        override fun onBindViewHolder(holder: BookHolder,
+        override fun onBindViewHolder(holder: PublisherHolder,
                                       position: Int) {
-            val book = books!![position]
-            holder.bindBook(book)
+            val publisher = publishers!![position]
+            holder.bindPublisher(publisher)
         }
         override fun getItemCount(): Int {
-            return books!!.size
+            return publishers!!.size
         }
     }
 

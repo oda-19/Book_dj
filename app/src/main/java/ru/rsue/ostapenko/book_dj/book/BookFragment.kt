@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import ru.rsue.ostapenko.book_dj.R
 import java.util.*
 
+// Контроллер, взаимодействующий с объектами модели и представления
 class BookFragment : Fragment() {
     companion object {
         private const val ARG_BOOK_ID = "book_id"
@@ -111,7 +112,8 @@ class BookFragment : Fragment() {
         })
 
         yearPublish_update = v.findViewById(R.id.yearPublish_update)
-        book?.let { yearPublish_update.setText(it.yearPublish) }
+        var yearPublish = book?.yearPublish.toString()
+        yearPublish_update.setText(yearPublish)
         yearPublish_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence, start: Int, count: Int, after: Int) {
@@ -127,7 +129,8 @@ class BookFragment : Fragment() {
         })
 
         countPage_update = v.findViewById(R.id.countPage_update)
-        countPage_update.setText(book?.countPage ?: 0)
+        var countPage = book?.countPage.toString()
+        countPage_update.setText(countPage)
         countPage_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
                 s: CharSequence, start: Int, count: Int, after: Int) {

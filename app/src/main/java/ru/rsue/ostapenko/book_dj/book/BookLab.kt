@@ -7,6 +7,7 @@ import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.api.Connection.booksApi
 import java.util.*
 
+// Передача данных между классами-контроллерами
 class BookLab private constructor(context: Context) {
     val books = mutableListOf<Books>()
 

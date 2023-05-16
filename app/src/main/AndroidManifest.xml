@@ -8,18 +8,44 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/label_book"
         android:supportsRtl="true"
         android:theme="@style/Theme.Book_dj"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".book.BookListActivity" />
+            android:name=".author.AuthorListActivity"
+            android:label="Авторы"/>
+        <activity
+            android:name=".author.AuthorPagerActivity"
+            android:label="Авторы"
+            android:parentActivityName=".author.AuthorListActivity" />
+        <activity
+            android:name=".author.AuthorAddActivity"
+            android:label="Авторы"
+            android:parentActivityName=".author.AuthorListActivity" />
+
+        <activity
+            android:name=".publisher.PublisherListActivity"
+            android:label="Издательства" />
+        <activity
+            android:name=".publisher.PublisherPagerActivity"
+            android:label="Издательства"
+            android:parentActivityName=".publisher.PublisherListActivity" />
+        <activity
+            android:name=".publisher.PublisherAddActivity"
+            android:label="Издательства"
+            android:parentActivityName=".publisher.PublisherListActivity" />
+
+        <activity
+            android:name=".book.BookListActivity"
+            android:label="Книги" />
         <activity
             android:name=".book.BookPagerActivity"
+            android:label="Книги"
             android:parentActivityName=".book.BookListActivity" />
         <activity
             android:name=".book.BookAddActivity"
+            android:label="Книги"
             android:parentActivityName=".book.BookListActivity" />
         <activity
             android:name=".MainActivity"
