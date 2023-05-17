@@ -2,15 +2,18 @@ package ru.rsue.ostapenko.book_dj.author
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.R
+import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.authorsApi
+import ru.rsue.ostapenko.book_dj.book.Books
+import kotlin.system.exitProcess
 import kotlin.collections.List as List
 
 
@@ -27,11 +30,16 @@ class AuthorAddActivity : AppCompatActivity() {
         lastName_input = findViewById(R.id.lastName_input)
         add_button = findViewById(R.id.add_button)
 
+        // Асинхронная передача значения на сервер
         add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                authorsApi.postAuthor(getAuthor()).enqueue(object : Callback<Authors> {
+                Connection.authorsApi.postAuthor(addAuthor()).enqueue(object : Callback<Authors> {
                     override fun onResponse(call: Call<Authors>, response: Response<Authors>) {
                         println("передано")
+                        GlobalScope.launch {
+                            Connection.updateAuthors()
+                            exitProcess(0)
+                        }
                     }
 
                     override fun onFailure(call: Call<Authors>, t: Throwable) {
@@ -40,17 +48,12 @@ class AuthorAddActivity : AppCompatActivity() {
                     }
 
                 })
-
             }
         })
     }
 
-
-
-    fun getAuthor(): Authors {
-        /*val list = listOf<Authors>()
-        val id_author = list.size*/
-        return Authors(5,
+    fun addAuthor(): Authors {
+        return Authors(0,
             firstName_input.text.toString(),
             lastName_input.text.toString()
         )

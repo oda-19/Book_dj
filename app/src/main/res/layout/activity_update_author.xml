@@ -8,6 +8,16 @@
     tools:context=".author.AuthorUpdateActivity">
 
     <EditText
+        android:id="@+id/id_update_author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
         android:id="@+id/firstName_update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -6,11 +6,18 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.CompoundButton
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.R
+import ru.rsue.ostapenko.book_dj.api.Connection
 
 // Контроллер, взаимодействующий с объектами модели и представления
 class PublisherFragment : Fragment() {
@@ -26,6 +33,7 @@ class PublisherFragment : Fragment() {
     }
 
     private var publisher: Publishers? = null
+    private lateinit var id_update: EditText
     private lateinit var namePublisher_update: EditText
     private lateinit var address_update: EditText
     private lateinit var site_update: EditText
@@ -33,13 +41,18 @@ class PublisherFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super. onCreate(savedInstanceState)
         val publisherId = requireArguments().getSerializable(ARG_PUBLISHER_ID) as Int
-        publisher = PublisherLab.get(requireActivity()).getPublisher(publisherId)
+        publisher = Connection.publishers[publisherId - 1]
 
     }
 
     override fun onCreateView(inflater: LayoutInflater, container:
     ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.activity_update_publisher, container, false)
+
+        id_update = v.findViewById(R.id.id_update_publisher)
+        var updateId = publisher?.id.toString()
+        id_update.setText(updateId)
+
         namePublisher_update = v.findViewById(R.id.namePublisher_update)
         namePublisher_update.setText(publisher?.namePublisher)
         namePublisher_update.addTextChangedListener(object : TextWatcher {
@@ -87,6 +100,22 @@ class PublisherFragment : Fragment() {
                 // И здесь тоже
             }
         })
+
+        v.findViewById<Button>(R.id.delete_button).setOnClickListener {
+            println("Успешно")
+            GlobalScope.launch {
+                Connection.publishersApi.deletePublisher(id_update.text.toString().toInt()).enqueue(object :
+                    Callback<Unit> {
+                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                        println("передано")
+                    }
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+                        println("ошибка")
+                        t.printStackTrace()
+                    }
+                })
+            }
+        }
 
         return v
     }

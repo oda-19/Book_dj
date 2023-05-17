@@ -24,9 +24,6 @@ class AuthorUpdateActivity : AppCompatActivity() {
         update_button = findViewById(R.id.update_button)
         delete_button = findViewById(R.id.delete_button)
 
-        //First we call this
-        getAndSetIntentData()
-
         //Set actionbar title after getAndSetIntentData method
         val ab: ActionBar? = supportActionBar
         if (ab != null) {
@@ -44,53 +41,8 @@ class AuthorUpdateActivity : AppCompatActivity() {
         })
         delete_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                confirmDialog()
+
             }
         })
-    }
-
-    fun getAndSetIntentData() {
-        /*if (intent.hasExtra("id") && intent.hasExtra("code") &&
-            intent.hasExtra("title") && intent.hasExtra("authorId") &&
-            intent.hasExtra("publishId") && intent.hasExtra("yearPublish") &&
-            intent.hasExtra("countPage") && intent.hasExtra("hardcover") &&
-            intent.hasExtra("abstract") && intent.hasExtra("status")
-        ) {
-            //Getting Data from Intent
-            id = intent.getStringExtra("id")
-            code = intent.getStringExtra("code")
-            title = intent.getStringExtra("title")
-            authorId = intent.getStringExtra("authorId")
-            publishId = intent.getStringExtra("publishId")
-            yearPublish = intent.getStringExtra("yearPublish")
-            countPage = intent.getStringExtra("countPage")
-            hardcover = intent.getStringExtra("hardcover")
-            abstract = intent.getStringExtra("abstract")
-            status = intent.getStringExtra("status")
-
-            //Setting Intent Data
-            title_input.setText(title)
-            author_input.setText(author)
-            pages_input.setText(pages)
-            Log.d("stev", "$title $author $pages")
-        } else {
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show()
-        }*/
-    }
-
-    fun confirmDialog() {
-        /*val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setTitle("Delete $title ?")
-        builder.setMessage("Are you sure you want to delete $title ?")
-        builder.setPositiveButton("Yes",
-            DialogInterface.OnClickListener { dialogInterface, i ->
-                val myDB = MyDatabaseHelper(this@UpdateActivity)
-                myDB.deleteOneRow(id)
-                finish()
-            })
-        builder.setNegativeButton("No",
-            DialogInterface.OnClickListener { dialogInterface, i -> })
-        builder.create().show()
-    }*/
     }
 }

@@ -6,12 +6,19 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.CompoundButton
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
+import ru.rsue.ostapenko.book_dj.author.Authors
 
 // Контроллер, взаимодействующий с объектами модели и представления
 class BookFragment : Fragment() {
@@ -27,6 +34,7 @@ class BookFragment : Fragment() {
     }
 
     private var book: Books? = null
+    private lateinit var id_update: EditText
     private lateinit var code_update: EditText
     private lateinit var title_update: EditText
     private lateinit var authorId_update: EditText
@@ -38,24 +46,31 @@ class BookFragment : Fragment() {
     private lateinit var status_update: CheckBox
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super. onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState)
         val bookId = requireArguments().getSerializable(ARG_BOOK_ID) as Int
         book = Connection.books[bookId - 1]
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container:
-    ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.activity_update_book, container, false)
+
+        id_update = v.findViewById(R.id.id_update_book)
+        var updateId = book?.id.toString()
+        id_update.setText(updateId)
+
         code_update = v.findViewById(R.id.code_update)
         code_update.setText(book?.code)
         code_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int, after: Int) {
+                s: CharSequence, start: Int, count: Int, after: Int
+            ) {
                 // Здесь намеренно оставлено пустое место
             }
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int, count: Int) {
+                s: CharSequence, start: Int, before: Int, count: Int
+            ) {
                 book?.code = s.toString()
             }
             override fun afterTextChanged(c: Editable) {
@@ -67,11 +82,13 @@ class BookFragment : Fragment() {
         title_update.setText(book?.title)
         title_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int, after: Int) {
+                s: CharSequence, start: Int, count: Int, after: Int
+            ) {
                 // Здесь намеренно оставлено пустое место
             }
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int, count: Int) {
+                s: CharSequence, start: Int, before: Int, count: Int
+            ) {
                 book?.title = s.toString()
             }
             override fun afterTextChanged(c: Editable) {
@@ -84,11 +101,13 @@ class BookFragment : Fragment() {
         authorId_update.setText(authorId)
         authorId_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int, after: Int) {
+                s: CharSequence, start: Int, count: Int, after: Int
+            ) {
                 // Здесь намеренно оставлено пустое место
             }
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int, count: Int) {
+                s: CharSequence, start: Int, before: Int, count: Int
+            ) {
                 book?.authorId = s.toString().toInt()
             }
             override fun afterTextChanged(c: Editable) {
@@ -101,11 +120,13 @@ class BookFragment : Fragment() {
         publishId_update.setText(publishId)
         publishId_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int, after: Int) {
+                s: CharSequence, start: Int, count: Int, after: Int
+            ) {
                 // Здесь намеренно оставлено пустое место
             }
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int, count: Int) {
+                s: CharSequence, start: Int, before: Int, count: Int
+            ) {
                 book?.publishId = s.toString().toInt()
             }
             override fun afterTextChanged(c: Editable) {
@@ -118,11 +139,13 @@ class BookFragment : Fragment() {
         yearPublish_update.setText(yearPublish)
         yearPublish_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int, after: Int) {
+                s: CharSequence, start: Int, count: Int, after: Int
+            ) {
                 // Здесь намеренно оставлено пустое место
             }
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int, count: Int) {
+                s: CharSequence, start: Int, before: Int, count: Int
+            ) {
                 book?.yearPublish = s.toString().toInt()
             }
             override fun afterTextChanged(c: Editable) {
@@ -135,11 +158,13 @@ class BookFragment : Fragment() {
         countPage_update.setText(countPage)
         countPage_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int, after: Int) {
+                s: CharSequence, start: Int, count: Int, after: Int
+            ) {
                 // Здесь намеренно оставлено пустое место
             }
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int, count: Int) {
+                s: CharSequence, start: Int, before: Int, count: Int
+            ) {
                 book?.countPage = s.toString().toInt()
             }
             override fun afterTextChanged(c: Editable) {
@@ -151,11 +176,13 @@ class BookFragment : Fragment() {
         hardcover_update.setText(book?.hardcover)
         hardcover_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int, after: Int) {
+                s: CharSequence, start: Int, count: Int, after: Int
+            ) {
                 // Здесь намеренно оставлено пустое место
             }
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int, count: Int) {
+                s: CharSequence, start: Int, before: Int, count: Int
+            ) {
                 book?.hardcover = s.toString()
             }
             override fun afterTextChanged(c: Editable) {
@@ -167,11 +194,13 @@ class BookFragment : Fragment() {
         abstract_update.setText(book?.abstract)
         abstract_update.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
-                s: CharSequence, start: Int, count: Int, after: Int) {
+                s: CharSequence, start: Int, count: Int, after: Int
+            ) {
                 // Здесь намеренно оставлено пустое место
             }
             override fun onTextChanged(
-                s: CharSequence, start: Int, before: Int, count: Int) {
+                s: CharSequence, start: Int, before: Int, count: Int
+            ) {
                 book?.abstract = s.toString()
             }
             override fun afterTextChanged(c: Editable) {
@@ -181,11 +210,26 @@ class BookFragment : Fragment() {
 
         status_update = v.findViewById(R.id.status_update)
         status_update.setChecked(book?.status!!)
-        status_update.setOnCheckedChangeListener{
-                compoundButton: CompoundButton,
-                isChecked: Boolean ->
+        status_update.setOnCheckedChangeListener { compoundButton: CompoundButton,
+                                                   isChecked: Boolean ->
             // Назначение флага прочтения книги
             book?.status = isChecked
+        }
+
+        v.findViewById<Button>(R.id.delete_button).setOnClickListener {
+            println("Успешно")
+            GlobalScope.launch {
+                Connection.booksApi.deleteBook(id_update.text.toString().toInt()).enqueue(object :
+                    Callback<Unit> {
+                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                        println("передано")
+                    }
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+                        println("ошибка")
+                        t.printStackTrace()
+                    }
+                })
+            }
         }
 
         return v

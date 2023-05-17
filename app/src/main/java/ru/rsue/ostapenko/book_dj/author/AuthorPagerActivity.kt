@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import ru.rsue.ostapenko.book_dj.R
+import ru.rsue.ostapenko.book_dj.api.Connection
 
 // Листание данных между активностями
 class AuthorPagerActivity : AppCompatActivity() {
@@ -34,7 +35,7 @@ class AuthorPagerActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.activity_pager_author_view_pager)
         viewPager.adapter = ViewPagerAdapter(this)
 
-        authors = AuthorLab.get(this).authors
+        authors = Connection.authors
         for (i in authors.indices)
             if (authors[i].id == authorId) {
                 viewPager.currentItem = i
@@ -45,8 +46,7 @@ class AuthorPagerActivity : AppCompatActivity() {
 
     private class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
         FragmentStateAdapter(fragmentActivity) {
-        private val authors: List<Authors> =
-            AuthorLab.get(fragmentActivity).authors
+        private val authors: List<Authors> = Connection.authors
         override fun getItemCount() = authors.size
         override fun createFragment(position: Int) =
             AuthorFragment.newInstance(authors[position].id)

@@ -1,9 +1,7 @@
 package ru.rsue.ostapenko.book_dj.api
 
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 import ru.rsue.ostapenko.book_dj.book.Books
 import ru.rsue.ostapenko.book_dj.publisher.Publishers
 
@@ -13,4 +11,7 @@ interface PublishersApi {
 
     @POST("api/publishers/")
     fun postPublisher(@Body publishers: Publishers): Call<Publishers>
+
+    @DELETE("api/publishers/{id}")
+    fun deletePublisher(@Path("id") publisherId: Int): Call<Unit>
 }

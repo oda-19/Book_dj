@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.rsue.ostapenko.book_dj.R
+import ru.rsue.ostapenko.book_dj.api.Connection
+import ru.rsue.ostapenko.book_dj.book.BookListFragment
 
 // Отображение данных в списке
 class AuthorListFragment : Fragment() {
@@ -16,10 +18,8 @@ class AuthorListFragment : Fragment() {
     private var adapter: AuthorAdapter? = null
     lateinit var add_button: FloatingActionButton
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(
             R.layout.fragment_list_author, container,
             false
@@ -28,7 +28,6 @@ class AuthorListFragment : Fragment() {
             .findViewById(R.id.recyclerView)
         recyclerView!!.layoutManager = LinearLayoutManager(activity)
         updateUI()
-
 
         add_button = view
             .findViewById(R.id.floatingActionButton_add)
@@ -43,8 +42,7 @@ class AuthorListFragment : Fragment() {
     }
 
     private fun updateUI() {
-        val authorLab = AuthorLab.get(requireActivity())
-        val authors = authorLab.authors
+        val authors = Connection.authors
         adapter = AuthorAdapter(authors)
         recyclerView!!.adapter = adapter
         if (adapter == null) {

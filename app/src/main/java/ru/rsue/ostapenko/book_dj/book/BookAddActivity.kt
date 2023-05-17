@@ -56,7 +56,7 @@ class BookAddActivity : AppCompatActivity() {
         // Асинхронная передача значения на сервер
         add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                booksApi.postBook(getBook()).enqueue(object : Callback<Books> {
+                booksApi.postBook(addBook()).enqueue(object : Callback<Books> {
                     override fun onResponse(call: Call<Books>, response: Response<Books>) {
                         println("передано")
                         GlobalScope.launch {
@@ -107,7 +107,7 @@ class BookAddActivity : AppCompatActivity() {
             }
     }
 
-    fun getBook(): Books {
+    fun addBook(): Books {
         return Books(
             0,
             author_select.id,

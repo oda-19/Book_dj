@@ -7,10 +7,14 @@ import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import ru.rsue.ostapenko.book_dj.R
+import ru.rsue.ostapenko.book_dj.api.Connection.booksApi
 
 
 class BookUpdateActivity : AppCompatActivity() {
+    lateinit var id_update: EditText
     lateinit var code_update: EditText
     lateinit var title_update: EditText
     lateinit var authorId_update: EditText
@@ -26,6 +30,7 @@ class BookUpdateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_book)
+        id_update = findViewById(R.id.id_update_book)
         code_update = findViewById(R.id.code_update)
         title_update = findViewById(R.id.title_update)
         authorId_update = findViewById(R.id.authorId_update)
@@ -38,15 +43,12 @@ class BookUpdateActivity : AppCompatActivity() {
         update_button = findViewById(R.id.update_button)
         delete_button = findViewById(R.id.delete_button)
 
-        //First we call this
-        getAndSetIntentData()
-
         //Set actionbar title after getAndSetIntentData method
         val ab: ActionBar? = supportActionBar
         if (ab != null) {
             ab.setTitle(title)
         }
-        update_button.setOnClickListener(object : View.OnClickListener {
+        /*update_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
                 //And only then we call this
                 /*val myDB = MyDatabaseHelper(this@UpdateActivity)
@@ -56,55 +58,11 @@ class BookUpdateActivity : AppCompatActivity() {
                 myDB.updateData(id, title, author, pages)*/
             }
         })
-        delete_button.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-                confirmDialog()
+        delete_button.setOnClickListener {
+            println("Успешно")
+            GlobalScope.launch {
+                booksApi.deleteBook(id_update.toString().toInt()).execute()
             }
-        })
-    }
-
-    fun getAndSetIntentData() {
-        /*if (intent.hasExtra("id") && intent.hasExtra("code") &&
-            intent.hasExtra("title") && intent.hasExtra("authorId") &&
-            intent.hasExtra("publishId") && intent.hasExtra("yearPublish") &&
-            intent.hasExtra("countPage") && intent.hasExtra("hardcover") &&
-            intent.hasExtra("abstract") && intent.hasExtra("status")
-        ) {
-            //Getting Data from Intent
-            id = intent.getStringExtra("id")
-            code = intent.getStringExtra("code")
-            title = intent.getStringExtra("title")
-            authorId = intent.getStringExtra("authorId")
-            publishId = intent.getStringExtra("publishId")
-            yearPublish = intent.getStringExtra("yearPublish")
-            countPage = intent.getStringExtra("countPage")
-            hardcover = intent.getStringExtra("hardcover")
-            abstract = intent.getStringExtra("abstract")
-            status = intent.getStringExtra("status")
-
-            //Setting Intent Data
-            title_input.setText(title)
-            author_input.setText(author)
-            pages_input.setText(pages)
-            Log.d("stev", "$title $author $pages")
-        } else {
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show()
         }*/
-    }
-
-    fun confirmDialog() {
-        /*val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setTitle("Delete $title ?")
-        builder.setMessage("Are you sure you want to delete $title ?")
-        builder.setPositiveButton("Yes",
-            DialogInterface.OnClickListener { dialogInterface, i ->
-                val myDB = MyDatabaseHelper(this@UpdateActivity)
-                myDB.deleteOneRow(id)
-                finish()
-            })
-        builder.setNegativeButton("No",
-            DialogInterface.OnClickListener { dialogInterface, i -> })
-        builder.create().show()
-    }*/
     }
 }
