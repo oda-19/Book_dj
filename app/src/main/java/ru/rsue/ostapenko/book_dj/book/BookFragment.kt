@@ -11,6 +11,7 @@ import android.widget.CompoundButton
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import ru.rsue.ostapenko.book_dj.R
+import ru.rsue.ostapenko.book_dj.api.Connection
 
 // Контроллер, взаимодействующий с объектами модели и представления
 class BookFragment : Fragment() {
@@ -39,7 +40,7 @@ class BookFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super. onCreate(savedInstanceState)
         val bookId = requireArguments().getSerializable(ARG_BOOK_ID) as Int
-        book = BookLab.get(requireActivity()).getBook(bookId)
+        book = Connection.books[bookId - 1]
 
     }
 

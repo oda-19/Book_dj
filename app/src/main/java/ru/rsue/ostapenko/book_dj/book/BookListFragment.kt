@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.rsue.ostapenko.book_dj.R
+import ru.rsue.ostapenko.book_dj.api.Connection
 
 // Отображение данных в списке
 class BookListFragment : Fragment() {
@@ -43,8 +44,7 @@ class BookListFragment : Fragment() {
     }
 
     private fun updateUI() {
-        val bookLab = BookLab.get(requireActivity())
-        val books = bookLab.books
+        val books = Connection.books
         adapter = BookAdapter(books)
         bookRecyclerView!!.adapter = adapter
         if (adapter == null) {

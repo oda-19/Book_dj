@@ -14,20 +14,8 @@ import ru.rsue.ostapenko.book_dj.api.Connection.booksApi
 import java.util.*
 
 // Передача данных между классами-контроллерами
-class BookLab private constructor(context: Context): ViewModel() {
+class BookLab(context: Context): ViewModel() {
     val books = mutableListOf<Books>()
-
-    companion object {
-        private var INSTANCE: BookLab? = null
-        fun get(context: Context): BookLab {
-            if (INSTANCE == null)
-                INSTANCE = BookLab(context)
-            else
-                INSTANCE!!.updateList()
-            return INSTANCE!!
-        }
-    }
-
     fun getBook(id: Int): Books? {
         for (book in books) {
             if (book.id == id) {
