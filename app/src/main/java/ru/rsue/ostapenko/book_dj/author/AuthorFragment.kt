@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CheckBox
-import android.widget.CompoundButton
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.GlobalScope
@@ -105,7 +103,31 @@ class AuthorFragment : Fragment() {
             }
         }
 
+        /*v.findViewById<Button>(R.id.update_button).setOnClickListener {
+            GlobalScope.launch {
+                authorsApi.putAuthor(id_update.text.toString().toInt()).enqueue(object :
+                    Callback<Authors> {
+                    override fun onResponse(call: Call<Authors>, response: Response<Authors>) {
+                        println("передано")
+                        GlobalScope.launch {
+                            Connection.updateAuthors()
+                            exitProcess(0)
+                        }
+                    }
+                    override fun onFailure(call: Call<Authors>, t: Throwable) {
+                        println("ошибка")
+                        t.printStackTrace()
+                    }
+                })
+            }
+        }*/
+
         return v
     }
-
+    /*fun update_putAuthor(): Authors {
+        return Authors(id_update.text.toString().toInt(),
+            firstName_update.text.toString(),
+            lastName_update.text.toString()
+        )
+    }*/
 }

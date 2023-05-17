@@ -21,7 +21,7 @@ class AuthorListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(
-            R.layout.fragment_list_author, container,
+            R.layout.fragment_list, container,
             false
         )
         recyclerView = view

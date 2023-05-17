@@ -28,11 +28,11 @@ class AuthorPagerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pager_author)
+        setContentView(R.layout.activity_pager)
         val authorId = intent
             .getSerializableExtra(EXTRA_AUTHOR_ID) as Int?
 
-        viewPager = findViewById(R.id.activity_pager_author_view_pager)
+        viewPager = findViewById(R.id.activity_pager_view_pager)
         viewPager.adapter = ViewPagerAdapter(this)
 
         authors = Connection.authors

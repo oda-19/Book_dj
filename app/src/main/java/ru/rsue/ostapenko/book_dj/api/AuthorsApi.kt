@@ -14,4 +14,7 @@ interface AuthorsApi {
 
     @DELETE("api/authors/{id}/")
     fun deleteAuthor(@Path("id") authorId: Int): Call<Unit>
+
+    //@PUT("api/authors/{id}/")
+    //fun putAuthor(@Path("id") authorId: Int): Call<Authors>
 }

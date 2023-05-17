@@ -22,11 +22,11 @@ class BookListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View = inflater.inflate(
-            R.layout.fragment_list_book, container,
+            R.layout.fragment_list, container,
             false
         )
         recyclerView = view
-            .findViewById(R.id.recyclerView_book)
+            .findViewById(R.id.recyclerView)
         recyclerView!!.layoutManager = LinearLayoutManager(activity)
         updateUI()
 

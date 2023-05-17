@@ -7,7 +7,15 @@ import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.R
+import ru.rsue.ostapenko.book_dj.api.Connection
+import ru.rsue.ostapenko.book_dj.api.Connection.authorsApi
+import kotlin.system.exitProcess
 
 
 class AuthorUpdateActivity : AppCompatActivity() {
@@ -29,20 +37,18 @@ class AuthorUpdateActivity : AppCompatActivity() {
         if (ab != null) {
             ab.setTitle(title)
         }
-        update_button.setOnClickListener(object : View.OnClickListener {
+
+        delete_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                //And only then we call this
-                /*val myDB = MyDatabaseHelper(this@UpdateActivity)
-                title = title_input.text.toString().trim { it <= ' ' }
-                author = author_input.getText().toString().trim()
-                pages = pages_input.getText().toString().trim()
-                myDB.updateData(id, title, author, pages)*/
+
             }
         })
-        delete_button.setOnClickListener(object : View.OnClickListener {
+
+        update_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
 
             }
         })
     }
 }
+

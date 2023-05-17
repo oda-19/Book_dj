@@ -28,11 +28,11 @@ class BookPagerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pager_book)
+        setContentView(R.layout.activity_pager)
         val bookId = intent
             .getSerializableExtra(EXTRA_BOOK_ID) as Int?
 
-        viewPager = findViewById(R.id.activity_pager_book_view_pager)
+        viewPager = findViewById(R.id.activity_pager_view_pager)
         viewPager.adapter = ViewPagerAdapter(this)
 
         books = Connection.books

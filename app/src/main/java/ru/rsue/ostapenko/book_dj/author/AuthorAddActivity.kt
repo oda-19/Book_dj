@@ -33,7 +33,7 @@ class AuthorAddActivity : AppCompatActivity() {
         // Асинхронная передача значения на сервер
         add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                Connection.authorsApi.postAuthor(addAuthor()).enqueue(object : Callback<Authors> {
+                authorsApi.postAuthor(addAuthor()).enqueue(object : Callback<Authors> {
                     override fun onResponse(call: Call<Authors>, response: Response<Authors>) {
                         println("передано")
                         GlobalScope.launch {
