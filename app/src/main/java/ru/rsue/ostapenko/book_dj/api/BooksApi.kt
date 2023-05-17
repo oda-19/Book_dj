@@ -15,6 +15,6 @@ interface BooksApi {
     @POST("api/books/")
     fun postBook(@Body books: Books): Call<Books>
 
-    @DELETE("api/books/{id}")
+    @DELETE("api/books/{id}/")
     fun deleteBook(@Path("id") bookId: Int): Call<Unit>
 }

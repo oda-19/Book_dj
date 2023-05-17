@@ -12,6 +12,6 @@ interface PublishersApi {
     @POST("api/publishers/")
     fun postPublisher(@Body publishers: Publishers): Call<Publishers>
 
-    @DELETE("api/publishers/{id}")
+    @DELETE("api/publishers/{id}/")
     fun deletePublisher(@Path("id") publisherId: Int): Call<Unit>
 }

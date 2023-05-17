@@ -18,7 +18,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
+import ru.rsue.ostapenko.book_dj.api.Connection.booksApi
 import ru.rsue.ostapenko.book_dj.author.Authors
+import kotlin.system.exitProcess
 
 // Контроллер, взаимодействующий с объектами модели и представления
 class BookFragment : Fragment() {
@@ -217,12 +219,15 @@ class BookFragment : Fragment() {
         }
 
         v.findViewById<Button>(R.id.delete_button).setOnClickListener {
-            println("Успешно")
             GlobalScope.launch {
-                Connection.booksApi.deleteBook(id_update.text.toString().toInt()).enqueue(object :
+                booksApi.deleteBook(id_update.text.toString().toInt()).enqueue(object :
                     Callback<Unit> {
                     override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                         println("передано")
+                        GlobalScope.launch {
+                            Connection.updateBooks()
+                            exitProcess(0)
+                        }
                     }
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
                         println("ошибка")
