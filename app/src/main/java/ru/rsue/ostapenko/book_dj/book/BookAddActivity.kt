@@ -14,7 +14,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
-import ru.rsue.ostapenko.book_dj.api.Connection.authorsApi
 import ru.rsue.ostapenko.book_dj.api.Connection.booksApi
 import ru.rsue.ostapenko.book_dj.api.Connection.publishersApi
 import ru.rsue.ostapenko.book_dj.author.Authors
@@ -33,8 +32,8 @@ class BookAddActivity : AppCompatActivity() {
     lateinit var status_input: CheckBox
     lateinit var add_button: Button
 
-    lateinit var author_select: Authors
-    lateinit var publish_select: Publishers
+    var author_select: Authors
+    var publish_select: Publishers
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,9 +50,10 @@ class BookAddActivity : AppCompatActivity() {
         status_input = findViewById(R.id.status_input)
         add_button = findViewById(R.id.add_button)
 
+        // Асинхронная передача значения на сервер
         add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                /*booksApi.postBook(getBook()).enqueue(object : Callback<Books> {
+                booksApi.postBook(getBook()).enqueue(object : Callback<Books> {
                     override fun onResponse(call: Call<Books>, response: Response<Books>) {
                         println("передано")
                     }
@@ -63,45 +63,11 @@ class BookAddActivity : AppCompatActivity() {
                         t.printStackTrace()
                     }
 
-                })*/
-            }
-        })
-    }
-}
-        /*authorId_input.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, Connection.authors())
-
-        authorId_input.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                author_select = Connection.authors().get(p2)
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-        }
-
-        publishId_input.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                publishersApi.getPublishers().enqueue(object : Callback<List<Publishers>> {
-                    override fun onResponse(call: Call<List<Publishers>>, response: Response<List<Publishers>>) {
-                        if (response.isSuccessful) {
-                            publish_select = response.body()?.get(p2)?: Publishers()
-                        }
-                    }
-
-                    override fun onFailure(call: Call<List<Publishers>>, t: Throwable) {
-                        TODO("Not yet implemented")
-                    }
-
                 })
             }
+        })
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
 
-        }
     }
 
     fun getBook(): Books {
@@ -117,7 +83,8 @@ class BookAddActivity : AppCompatActivity() {
             abstract_input.text.toString(),
             status_input.isChecked
         )
-    }*/
+    }
+}
 
 
 

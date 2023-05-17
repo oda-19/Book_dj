@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.book.BookPagerActivity
 import ru.rsue.ostapenko.book_dj.databinding.ActivityMainBinding
 
@@ -40,6 +41,13 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Thread {
+            Connection.update()
+        }.start()
     }
 
     override fun onSupportNavigateUp(): Boolean {

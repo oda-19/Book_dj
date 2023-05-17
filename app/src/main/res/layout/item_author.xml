@@ -50,17 +50,6 @@ android:id="@+id/mainLayout">
             app:layout_constraintStart_toStartOf="@+id/author_firstName"
             app:layout_constraintTop_toBottomOf="@+id/author_firstName" />
 
-        <ImageView
-            android:id="@+id/delete_author"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/inc_more_vert"
-            tools:srcCompat="@drawable/inc_more_vert" />
-
         <View
             android:id="@+id/separator"
             android:layout_width="0dp"

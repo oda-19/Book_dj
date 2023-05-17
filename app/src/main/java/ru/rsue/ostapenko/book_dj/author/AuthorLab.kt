@@ -6,6 +6,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.api.Connection.authorsApi
 import ru.rsue.ostapenko.book_dj.api.Connection.booksApi
+import ru.rsue.ostapenko.book_dj.book.Books
 
 // Передача данных между классами-контроллерами
 class AuthorLab private constructor(context: Context) {
@@ -38,6 +39,7 @@ class AuthorLab private constructor(context: Context) {
         authorsApi.getAuthors().enqueue(object : Callback<List<Authors>> {
             override fun onResponse(call: Call<List<Authors>>, response: Response<List<Authors>>) {
                 if (response.isSuccessful) {
+                    authors.clear()
                     response.body()?.let {
                         authors.addAll(it)
                     }

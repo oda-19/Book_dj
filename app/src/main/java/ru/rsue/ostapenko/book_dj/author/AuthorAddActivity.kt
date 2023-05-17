@@ -6,7 +6,12 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.R
+import ru.rsue.ostapenko.book_dj.api.Connection.authorsApi
+import kotlin.collections.List as List
 
 
 class AuthorAddActivity : AppCompatActivity() {
@@ -24,15 +29,31 @@ class AuthorAddActivity : AppCompatActivity() {
 
         add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                /*val book = Book()
-                BookLab.get(requireActivity()).addBook(book)
-                val intent =
-                    BookPagerActivity.newIntent(requireActivity(),
-                        book.id)
-                startActivity(intent)
-                true*/
+                authorsApi.postAuthor(getAuthor()).enqueue(object : Callback<Authors> {
+                    override fun onResponse(call: Call<Authors>, response: Response<Authors>) {
+                        println("передано")
+                    }
+
+                    override fun onFailure(call: Call<Authors>, t: Throwable) {
+                        println("ошибка")
+                        t.printStackTrace()
+                    }
+
+                })
 
             }
         })
     }
+
+
+
+    fun getAuthor(): Authors {
+        /*val list = listOf<Authors>()
+        val id_author = list.size*/
+        return Authors(5,
+            firstName_input.text.toString(),
+            lastName_input.text.toString()
+        )
+    }
+
 }

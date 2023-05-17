@@ -1,14 +1,20 @@
 package ru.rsue.ostapenko.book_dj.book
 
 import android.content.Context
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.booksApi
 import java.util.*
 
 // Передача данных между классами-контроллерами
-class BookLab private constructor(context: Context) {
+class BookLab private constructor(context: Context): ViewModel() {
     val books = mutableListOf<Books>()
 
     companion object {
@@ -17,7 +23,7 @@ class BookLab private constructor(context: Context) {
             if (INSTANCE == null)
                 INSTANCE = BookLab(context)
             else
-                INSTANCE!!.update_add_books()
+                INSTANCE!!.updateList()
             return INSTANCE!!
         }
     }
@@ -25,36 +31,21 @@ class BookLab private constructor(context: Context) {
     fun getBook(id: Int): Books? {
         for (book in books) {
             if (book.id == id) {
-                Thread.sleep(100)
                 return book
             }
         }
         return null
     }
 
-    fun addBook(book: Books){
-        books.add(book)
+    fun updateList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            books.clear()
+            books.addAll(Connection.updateBooks())
+        }
     }
 
     init {
-        update_add_books()
-
-    }
-
-    fun update_add_books() {
-        booksApi.getBooks().enqueue(object : Callback<List<Books>> {
-            override fun onResponse(call: Call<List<Books>>, response: Response<List<Books>>) {
-                if (response.isSuccessful) {
-                    books.clear()
-                    response.body()?.let {
-                        books.addAll(it)
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<List<Books>>, t: Throwable) {
-                println("Ошибка")
-            }
-        })
+        books.clear()
+        books.addAll(Connection.books)
     }
 }

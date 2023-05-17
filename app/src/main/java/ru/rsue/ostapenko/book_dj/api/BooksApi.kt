@@ -10,6 +10,6 @@ interface BooksApi {
     @GET("api/books/")
     fun getBooks(): Call<List<Books>>
 
-    /*@POST("api/books/")
-    fun postBook(@Body books: Books): Call<Books>*/
+    @POST("api/books/")
+    fun postBook(@Body books: Books): Call<Books>
 }

@@ -5,7 +5,13 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.R
+import ru.rsue.ostapenko.book_dj.api.Connection
+import ru.rsue.ostapenko.book_dj.api.Connection.publishersApi
+import ru.rsue.ostapenko.book_dj.author.Authors
 
 
 class PublisherAddActivity : AppCompatActivity() {
@@ -25,15 +31,29 @@ class PublisherAddActivity : AppCompatActivity() {
 
         add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                /*val book = Book()
-                BookLab.get(requireActivity()).addBook(book)
-                val intent =
-                    BookPagerActivity.newIntent(requireActivity(),
-                        book.id)
-                startActivity(intent)
-                true*/
+                publishersApi.postPublisher(getPublisher()).enqueue(object : Callback<Publishers> {
+                    override fun onResponse(call: Call<Publishers>, response: Response<Publishers>) {
+                        println("передано")
+                    }
+
+                    override fun onFailure(call: Call<Publishers>, t: Throwable) {
+                        println("ошибка")
+                        t.printStackTrace()
+                    }
+
+                })
 
             }
         })
+    }
+
+    fun getPublisher(): Publishers {
+        /*val list = listOf<Authors>()
+        val id_author = list.size*/
+        return Publishers(3,
+            namePublisher_input.text.toString(),
+            address_input.text.toString(),
+            site_input.text.toString()
+        )
     }
 }
