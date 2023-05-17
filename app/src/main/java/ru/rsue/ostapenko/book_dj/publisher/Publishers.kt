@@ -6,4 +6,10 @@ data class Publishers(
     var namePublisher: String = "",
     var address: String = "",
     var site: String = ""
-)
+
+
+) {
+    override fun toString(): String {
+        return "$namePublisher"
+    }
+}

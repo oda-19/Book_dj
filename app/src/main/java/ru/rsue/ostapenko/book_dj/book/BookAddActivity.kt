@@ -32,8 +32,8 @@ class BookAddActivity : AppCompatActivity() {
     lateinit var status_input: CheckBox
     lateinit var add_button: Button
 
-    var author_select: Authors
-    var publish_select: Publishers
+    lateinit var author_select: Authors
+    lateinit var publish_select: Publishers
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,7 +67,35 @@ class BookAddActivity : AppCompatActivity() {
             }
         })
 
+        authorId_input.adapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, Connection.authors)
+                .apply { setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
 
+        authorId_input.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                author_select = Connection.authors[p2]
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+        publishId_input.adapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, Connection.publishers)
+                .apply { setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
+
+        publishId_input.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                publish_select = Connection.publishers[p2]
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
     }
 
     fun getBook(): Books {
