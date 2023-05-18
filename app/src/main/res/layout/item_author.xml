@@ -29,12 +29,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/author_firstName"
+                android:id="@+id/author_lastName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:text="FirstName 1"
+                android:text="LastName 1"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#000"
@@ -42,12 +42,12 @@
                 app:layout_constraintTop_toTopOf="@+id/author_id" />
 
             <TextView
-                android:id="@+id/author_lastName"
+                android:id="@+id/author_firstName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LastName 1"
-                app:layout_constraintStart_toStartOf="@+id/author_firstName"
-                app:layout_constraintTop_toBottomOf="@+id/author_firstName" />
+                android:text="FirstName 1"
+                app:layout_constraintStart_toStartOf="@+id/author_lastName"
+                app:layout_constraintTop_toBottomOf="@+id/author_lastName" />
 
             <View
                 android:id="@+id/separator"
@@ -56,7 +56,7 @@
                 android:background="@color/gray"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/author_lastName" />
+                app:layout_constraintStart_toStartOf="@+id/author_firstName" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
