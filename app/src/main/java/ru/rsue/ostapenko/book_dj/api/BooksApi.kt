@@ -1,12 +1,9 @@
 package ru.rsue.ostapenko.book_dj.api
 
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 import ru.rsue.ostapenko.book_dj.book.Books
+
 
 interface BooksApi {
     @GET("api/books/")
@@ -17,4 +14,7 @@ interface BooksApi {
 
     @DELETE("api/books/{id}/")
     fun deleteBook(@Path("id") bookId: Int): Call<Unit>
+
+    @PUT("api/books/{id}/")
+    fun putBook(@Path("id") bookId: Int, @Body books: Books): Call<Unit>
 }

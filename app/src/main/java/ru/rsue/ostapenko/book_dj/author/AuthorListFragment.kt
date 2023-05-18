@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
-import ru.rsue.ostapenko.book_dj.book.BookListFragment
+
 
 // Отображение данных в списке
 class AuthorListFragment : Fragment() {
@@ -19,31 +19,29 @@ class AuthorListFragment : Fragment() {
     lateinit var add_button: FloatingActionButton
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(
-            R.layout.fragment_list, container,
-            false
-        )
-        recyclerView = view
-            .findViewById(R.id.recyclerView)
+        val view: View = inflater.inflate(R.layout.fragment_list, container, false)
+
+        recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView!!.layoutManager = LinearLayoutManager(activity)
+
         updateUI()
 
-        add_button = view
-            .findViewById(R.id.floatingActionButton_add)
+        add_button = view.findViewById(R.id.floatingActionButton_add)
         add_button.setOnClickListener(object: View.OnClickListener {
             override fun onClick(view: View): Unit {
-                // Handler code here.
                 val intent = Intent(context, AuthorAddActivity::class.java);
                 startActivity(intent);
             }
         })
+
         return view
     }
 
     private fun updateUI() {
-        val authors = Connection.authors
+        val authors = Connection.authorsBeauty()
         adapter = AuthorAdapter(authors)
         recyclerView!!.adapter = adapter
+
         if (adapter == null) {
             adapter = AuthorAdapter(authors)
             recyclerView!!.adapter = adapter
@@ -58,14 +56,12 @@ class AuthorListFragment : Fragment() {
     }
 
     private class AuthorHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
-        var author_id: TextView =
-            itemView!!.findViewById(R.id.author_id)
-        var author_firstName: TextView =
-            itemView!!.findViewById(R.id.author_firstName)
-        var author_lastName: TextView =
-            itemView!!.findViewById(R.id.author_lastName)
+        var author_id: TextView = itemView!!.findViewById(R.id.author_id)
+        var author_firstName: TextView = itemView!!.findViewById(R.id.author_firstName)
+        var author_lastName: TextView = itemView!!.findViewById(R.id.author_lastName)
 
         private lateinit var author: Authors
+
         fun bindAuthor(author: Authors) {
             this.author = author
             author_id.text = author.id.toString()
@@ -79,30 +75,29 @@ class AuthorListFragment : Fragment() {
             val intent = AuthorPagerActivity.newIntent(context, author.id)
             context.startActivity(intent)
         }
-
     }
 
-    private class AuthorAdapter(authors: List<Authors>?) :
-        RecyclerView.Adapter<AuthorHolder?>() {
+    private class AuthorAdapter(authors: List<Authors>?) : RecyclerView.Adapter<AuthorHolder?>() {
         private var authors: List<Authors>? = null
+
         init {
             this.authors = authors
         }
-        override fun onCreateViewHolder(parent: ViewGroup,
-                                        viewType: Int): AuthorHolder {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AuthorHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val view = layoutInflater
-                .inflate(R.layout.item_author, parent, false)
+            val view = layoutInflater.inflate(R.layout.item_author, parent, false)
+
             return AuthorHolder(view)
         }
-        override fun onBindViewHolder(holder: AuthorHolder,
-                                      position: Int) {
+
+        override fun onBindViewHolder(holder: AuthorHolder, position: Int) {
             val author = authors!![position]
             holder.bindAuthor(author)
         }
+
         override fun getItemCount(): Int {
             return authors!!.size
         }
     }
-
 }

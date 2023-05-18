@@ -10,14 +10,15 @@ import androidx.viewpager2.widget.ViewPager2
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 
+
 // Листание данных между активностями
 class AuthorPagerActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var authors: List<Authors>
 
     companion object {
-        private const val EXTRA_AUTHOR_ID =
-            "ru.rsue.android.ostapenko.book_dj.author_id"
+        private const val EXTRA_AUTHOR_ID = "ru.rsue.android.ostapenko.book_dj.author_id"
+
         fun newIntent(packageContext: Context?, authorId: Int?) = Intent(
             packageContext,
             AuthorPagerActivity::class.java
@@ -29,27 +30,24 @@ class AuthorPagerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pager)
-        val authorId = intent
-            .getSerializableExtra(EXTRA_AUTHOR_ID) as Int?
+
+        val authorId = intent.getSerializableExtra(EXTRA_AUTHOR_ID) as Int?
 
         viewPager = findViewById(R.id.activity_pager_view_pager)
         viewPager.adapter = ViewPagerAdapter(this)
 
-        authors = Connection.authors
+        authors = Connection.authorsBeauty()
         for (i in authors.indices)
             if (authors[i].id == authorId) {
                 viewPager.currentItem = i
                 break
             }
-
     }
 
-    private class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
-        FragmentStateAdapter(fragmentActivity) {
-        private val authors: List<Authors> = Connection.authors
+    private class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+        private val authors: List<Authors> = Connection.authorsBeauty()
+
         override fun getItemCount() = authors.size
-        override fun createFragment(position: Int) =
-            AuthorFragment.newInstance(authors[position].id)
+        override fun createFragment(position: Int) = AuthorFragment.newInstance(authors[position].id)
     }
-
 }

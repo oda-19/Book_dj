@@ -11,6 +11,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 
+
 // Отображение данных в списке
 class BookListFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
@@ -18,24 +19,21 @@ class BookListFragment : Fragment() {
     lateinit var add_button: FloatingActionButton
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(
-            R.layout.fragment_list, container,
-            false
-        )
-        recyclerView = view
-            .findViewById(R.id.recyclerView)
+        val view: View = inflater.inflate(R.layout.fragment_list, container, false)
+
+        recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView!!.layoutManager = LinearLayoutManager(activity)
+
         updateUI()
 
-        add_button = view
-            .findViewById(R.id.floatingActionButton_add)
+        add_button = view.findViewById(R.id.floatingActionButton_add)
         add_button.setOnClickListener(object: View.OnClickListener {
             override fun onClick(view: View): Unit {
-                // Handler code here.
                 val intent = Intent(context, BookAddActivity::class.java);
                 startActivity(intent);
             }
         })
+
         return view
     }
 
@@ -43,6 +41,7 @@ class BookListFragment : Fragment() {
         val books = Connection.books
         adapter = BookAdapter(books)
         recyclerView!!.adapter = adapter
+
         if (adapter == null) {
             adapter = BookAdapter(books)
             recyclerView!!.adapter = adapter
@@ -57,14 +56,12 @@ class BookListFragment : Fragment() {
     }
 
     private class BookHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
-        var book_id: TextView =
-            itemView!!.findViewById(R.id.book_id)
-        var book_title: TextView =
-            itemView!!.findViewById(R.id.book_title)
-        var book_author: TextView =
-            itemView!!.findViewById(R.id.book_author)
+        var book_id: TextView = itemView!!.findViewById(R.id.book_id)
+        var book_title: TextView = itemView!!.findViewById(R.id.book_title)
+        var book_author: TextView = itemView!!.findViewById(R.id.book_author)
 
         private lateinit var book: Books
+
         fun bindBook(book: Books) {
             this.book = book
             book_id.text = book.id.toString()
@@ -78,30 +75,29 @@ class BookListFragment : Fragment() {
             val intent = BookPagerActivity.newIntent(context, book.id)
             context.startActivity(intent)
         }
-
     }
 
-    private class BookAdapter(books: List<Books>?) :
-        RecyclerView.Adapter<BookHolder?>() {
+    private class BookAdapter(books: List<Books>?) : RecyclerView.Adapter<BookHolder?>() {
         private var books: List<Books>? = null
+
         init {
             this.books = books
         }
-        override fun onCreateViewHolder(parent: ViewGroup,
-                                        viewType: Int): BookHolder {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val view = layoutInflater
-                .inflate(R.layout.item_book, parent, false)
+            val view = layoutInflater.inflate(R.layout.item_book, parent, false)
+
             return BookHolder(view)
         }
-        override fun onBindViewHolder(holder: BookHolder,
-                                      position: Int) {
+
+        override fun onBindViewHolder(holder: BookHolder, position: Int) {
             val book = books!![position]
             holder.bindBook(book)
         }
+
         override fun getItemCount(): Int {
             return books!!.size
         }
     }
-
 }

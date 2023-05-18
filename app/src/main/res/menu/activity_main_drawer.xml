@@ -17,4 +17,5 @@
             android:icon="@drawable/inc_publisher"
             android:title="Издательства" />
     </group>
+
 </menu>

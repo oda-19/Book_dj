@@ -22,4 +22,5 @@
         android:name="ru.rsue.ostapenko.book_dj.publisher.PublisherListFragment"
         android:label="Издательства"
         tools:layout="@layout/fragment_list" />
+
 </navigation>

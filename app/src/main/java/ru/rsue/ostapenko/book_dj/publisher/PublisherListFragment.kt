@@ -11,6 +11,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 
+
 // Отображение данных в списке
 class PublisherListFragment : Fragment() {
     private var recyclerView: RecyclerView? = null
@@ -18,31 +19,29 @@ class PublisherListFragment : Fragment() {
     lateinit var add_button: FloatingActionButton
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(
-            R.layout.fragment_list, container,
-            false
-        )
-        recyclerView = view
-            .findViewById(R.id.recyclerView)
+        val view: View = inflater.inflate(R.layout.fragment_list, container, false)
+
+        recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView!!.layoutManager = LinearLayoutManager(activity)
+
         updateUI()
 
-        add_button = view
-            .findViewById(R.id.floatingActionButton_add)
+        add_button = view.findViewById(R.id.floatingActionButton_add)
         add_button.setOnClickListener(object: View.OnClickListener {
             override fun onClick(view: View): Unit {
-                // Handler code here.
                 val intent = Intent(context, PublisherAddActivity::class.java);
                 startActivity(intent);
             }
         })
+
         return view
     }
 
     private fun updateUI() {
-        val publishers = Connection.publishers
+        val publishers = Connection.publisherBeauty()
         adapter = PublisherAdapter(publishers)
         recyclerView!!.adapter = adapter
+
         if (adapter == null) {
             adapter = PublisherAdapter(publishers)
             recyclerView!!.adapter = adapter
@@ -57,14 +56,12 @@ class PublisherListFragment : Fragment() {
     }
 
     private class PublisherHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
-        var publisher_id: TextView =
-            itemView!!.findViewById(R.id.publisher_id)
-        var publisher_namePublisher: TextView =
-            itemView!!.findViewById(R.id.publisher_namePublisher)
-        var publisher_address: TextView =
-            itemView!!.findViewById(R.id.publisher_address)
+        var publisher_id: TextView = itemView!!.findViewById(R.id.publisher_id)
+        var publisher_namePublisher: TextView = itemView!!.findViewById(R.id.publisher_namePublisher)
+        var publisher_address: TextView = itemView!!.findViewById(R.id.publisher_address)
 
         private lateinit var publisher: Publishers
+
         fun bindPublisher(publisher: Publishers) {
             this.publisher = publisher
             publisher_id.text = publisher.id.toString()
@@ -78,30 +75,29 @@ class PublisherListFragment : Fragment() {
             val intent = PublisherPagerActivity.newIntent(context, publisher.id)
             context.startActivity(intent)
         }
-
     }
 
-    private class PublisherAdapter(publishers: List<Publishers>?) :
-        RecyclerView.Adapter<PublisherHolder?>() {
+    private class PublisherAdapter(publishers: List<Publishers>?) : RecyclerView.Adapter<PublisherHolder?>() {
         private var publishers: List<Publishers>? = null
+
         init {
             this.publishers = publishers
         }
-        override fun onCreateViewHolder(parent: ViewGroup,
-                                        viewType: Int): PublisherHolder {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PublisherHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val view = layoutInflater
-                .inflate(R.layout.item_publisher, parent, false)
+            val view = layoutInflater.inflate(R.layout.item_publisher, parent, false)
+
             return PublisherHolder(view)
         }
-        override fun onBindViewHolder(holder: PublisherHolder,
-                                      position: Int) {
+
+        override fun onBindViewHolder(holder: PublisherHolder, position: Int) {
             val publisher = publishers!![position]
             holder.bindPublisher(publisher)
         }
+
         override fun getItemCount(): Int {
             return publishers!!.size
         }
     }
-
 }

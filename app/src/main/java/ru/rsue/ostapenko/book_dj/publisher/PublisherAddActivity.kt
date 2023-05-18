@@ -13,7 +13,6 @@ import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.publishersApi
-import ru.rsue.ostapenko.book_dj.author.Authors
 import kotlin.system.exitProcess
 
 
@@ -21,6 +20,7 @@ class PublisherAddActivity : AppCompatActivity() {
     lateinit var namePublisher_input : EditText
     lateinit var address_input : EditText
     lateinit var site_input : EditText
+
     lateinit var add_button : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,20 +35,18 @@ class PublisherAddActivity : AppCompatActivity() {
         // Асинхронная передача значения на сервер
         add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                Connection.publishersApi.postPublisher(addPublisher()).enqueue(object : Callback<Publishers> {
+                publishersApi.postPublisher(addPublisher()).enqueue(object : Callback<Publishers> {
                     override fun onResponse(call: Call<Publishers>, response: Response<Publishers>) {
-                        println("передано")
+                        println("Передано")
                         GlobalScope.launch {
                             Connection.updatePublishers()
                             exitProcess(0)
                         }
                     }
-
                     override fun onFailure(call: Call<Publishers>, t: Throwable) {
-                        println("ошибка")
+                        println("Ошибка")
                         t.printStackTrace()
                     }
-
                 })
             }
         })

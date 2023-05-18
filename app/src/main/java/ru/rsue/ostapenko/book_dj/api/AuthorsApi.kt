@@ -3,7 +3,7 @@ package ru.rsue.ostapenko.book_dj.api
 import retrofit2.Call
 import retrofit2.http.*
 import ru.rsue.ostapenko.book_dj.author.Authors
-import ru.rsue.ostapenko.book_dj.book.Books
+
 
 interface AuthorsApi {
     @GET("api/authors/")
@@ -15,6 +15,6 @@ interface AuthorsApi {
     @DELETE("api/authors/{id}/")
     fun deleteAuthor(@Path("id") authorId: Int): Call<Unit>
 
-    //@PUT("api/authors/{id}/")
-    //fun putAuthor(@Path("id") authorId: Int): Call<Authors>
+    @PUT("api/authors/{id}/")
+    fun putAuthor(@Path("id") authorId: Int, @Body authors: Authors): Call<Unit>
 }
