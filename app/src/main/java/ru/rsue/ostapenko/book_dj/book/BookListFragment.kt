@@ -3,6 +3,7 @@ package ru.rsue.ostapenko.book_dj.book
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -59,6 +60,7 @@ class BookListFragment : Fragment() {
         var book_id: TextView = itemView!!.findViewById(R.id.book_id)
         var book_title: TextView = itemView!!.findViewById(R.id.book_title)
         var book_author: TextView = itemView!!.findViewById(R.id.book_author)
+        var book_status: CheckBox = itemView!!.findViewById(R.id.book_status)
 
         private lateinit var book: Books
 
@@ -67,6 +69,7 @@ class BookListFragment : Fragment() {
             book_id.text = book.id.toString()
             book_title.text = book.title
             book_author.text = Connection.authors.find { authors -> authors.id == book.authorId }.toString()
+            book_status.setChecked(book.status)
             itemView.setOnClickListener(this)
         }
 
