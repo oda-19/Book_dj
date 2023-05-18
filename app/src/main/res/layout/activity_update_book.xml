@@ -55,7 +55,7 @@
                 android:layout_width="324dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:gravity="center|bottom"
+                android:gravity="bottom|center"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,6 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:layout_marginLeft="4dp"
                     android:text="Автор"
                     android:textColor="#9D9D9D"
                     android:textSize="18sp" />
@@ -74,6 +75,7 @@
                     android:id="@+id/authorId_update"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="4dp"
                     android:hint="Автор"
                     android:inputType="textPersonName" />
 
@@ -83,6 +85,7 @@
                 android:id="@+id/separatorAuthor_update"
                 android:layout_width="324dp"
                 android:layout_height="1dp"
+                android:layout_marginLeft="4dp"
                 android:background="#9D9D9D"
                 app:layout_constraintBottom_toBottomOf="@+id/linearAuthor_update"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -104,6 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:layout_marginLeft="4dp"
                     android:text="Издательство"
                     android:textColor="#9D9D9D"
                     android:textSize="18sp" />
@@ -112,6 +116,7 @@
                     android:id="@+id/publishId_update"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="4dp"
                     android:hint="Издательство"
                     android:inputType="textPersonName" />
 
@@ -121,6 +126,7 @@
                 android:id="@+id/separatorPublisher_update"
                 android:layout_width="324dp"
                 android:layout_height="1dp"
+                android:layout_marginLeft="4dp"
                 android:background="#9D9D9D"
                 app:layout_constraintBottom_toBottomOf="@+id/linearPublisher_update"
                 app:layout_constraintEnd_toEndOf="parent"
