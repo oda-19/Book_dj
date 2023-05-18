@@ -40,7 +40,7 @@ class AuthorFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super. onCreate(savedInstanceState)
         val authorId = requireArguments().getSerializable(ARG_AUTHOR_ID) as Int
-        author = Connection.authors[authorId - 1]
+        author = Connection.authors.find { authors -> authors.id == authorId }
 
     }
 

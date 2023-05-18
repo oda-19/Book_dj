@@ -43,8 +43,7 @@ class PublisherFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super. onCreate(savedInstanceState)
         val publisherId = requireArguments().getSerializable(ARG_PUBLISHER_ID) as Int
-        publisher = Connection.publishers[publisherId - 1]
-
+        publisher = Connection.publishers.find { publishers -> publishers.id == publisherId }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container:

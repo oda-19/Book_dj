@@ -17,10 +17,7 @@ class BookListFragment : Fragment() {
     private var adapter: BookAdapter? = null
     lateinit var add_button: FloatingActionButton
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(
             R.layout.fragment_list, container,
             false
@@ -72,7 +69,7 @@ class BookListFragment : Fragment() {
             this.book = book
             book_id.text = book.id.toString()
             book_title.text = book.title
-            book_author.text = Connection.authors[book.authorId - 1].toString()
+            book_author.text = Connection.authors.find { authors -> authors.id == book.authorId }.toString()
             itemView.setOnClickListener(this)
         }
 

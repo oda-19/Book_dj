@@ -18,8 +18,7 @@ class AuthorListFragment : Fragment() {
     private var adapter: AuthorAdapter? = null
     lateinit var add_button: FloatingActionButton
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(
             R.layout.fragment_list, container,
             false

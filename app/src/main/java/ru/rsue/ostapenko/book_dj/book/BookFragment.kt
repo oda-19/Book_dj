@@ -50,7 +50,7 @@ class BookFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val bookId = requireArguments().getSerializable(ARG_BOOK_ID) as Int
-        book = Connection.books[bookId - 1]
+        book = Connection.books.find { books -> books.id == bookId }
 
     }
 
