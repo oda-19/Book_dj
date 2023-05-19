@@ -49,7 +49,7 @@
             android:parentActivityName=".book.BookListActivity" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"
+            android:label="Учет книг"
             android:theme="@style/Theme.Book_dj.NoActionBar"
 
             android:exported="true">

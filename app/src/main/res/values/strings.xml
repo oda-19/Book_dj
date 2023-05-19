@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">Book_dj</string>
-    <string name="title_activity_main">MainActivity</string>
     <string name="nav_header_desc">Navigation header</string>
 </resources>
