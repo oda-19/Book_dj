@@ -21,6 +21,7 @@ import kotlin.system.exitProcess
 
 
 // Контроллер, взаимодействующий с объектами модели и представления
+// Отображает инфу, которая содержится в экземпляре Publisher
 class PublisherFragment : Fragment() {
     companion object {
         private const val ARG_PUBLISHER_ID = "publisher_id"

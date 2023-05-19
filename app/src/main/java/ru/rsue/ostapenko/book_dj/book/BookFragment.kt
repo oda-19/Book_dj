@@ -22,6 +22,7 @@ import kotlin.system.exitProcess
 
 
 // Контроллер, взаимодействующий с объектами модели и представления
+// Отображает инфу, которая содержится в экземпляре Book
 class BookFragment : Fragment() {
     companion object {
         private const val ARG_BOOK_ID = "book_id"
