@@ -64,6 +64,7 @@ class BookAddActivity : AppCompatActivity() {
                             exitProcess(0)
                         }
                     }
+
                     override fun onFailure(call: Call<Books>, t: Throwable) {
                         println("Ошибка")
                         t.printStackTrace()
@@ -74,13 +75,14 @@ class BookAddActivity : AppCompatActivity() {
 
         authorId_input.adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_item, Connection.authorsBeauty())
-                .apply{ setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
+                .apply { setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
 
         authorId_input.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     author_select = Connection.authorsBeauty()[p2]
                 }
+
                 override fun onNothingSelected(p0: AdapterView<*>?) {
                     //
                 }
@@ -88,13 +90,14 @@ class BookAddActivity : AppCompatActivity() {
 
         publishId_input.adapter =
             ArrayAdapter(this, android.R.layout.simple_spinner_item, Connection.publisherBeauty())
-                .apply{ setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
+                .apply { setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
 
         publishId_input.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     publish_select = Connection.publisherBeauty()[p2]
                 }
+
                 override fun onNothingSelected(p0: AdapterView<*>?) {
                     //
                 }

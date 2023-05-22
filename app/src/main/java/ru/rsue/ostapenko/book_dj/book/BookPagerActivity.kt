@@ -44,7 +44,8 @@ class BookPagerActivity : AppCompatActivity() {
             }
     }
 
-    private class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+    private class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
+        FragmentStateAdapter(fragmentActivity) {
         private val books: List<Books> = Connection.books
 
         override fun getItemCount() = books.size

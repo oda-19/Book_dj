@@ -18,7 +18,11 @@ class AuthorListFragment : Fragment() {
     private var adapter: AuthorAdapter? = null
     lateinit var add_button: FloatingActionButton
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View = inflater.inflate(R.layout.fragment_list, container, false)
 
         recyclerView = view.findViewById(R.id.recyclerView)
@@ -27,7 +31,7 @@ class AuthorListFragment : Fragment() {
         updateUI()
 
         add_button = view.findViewById(R.id.floatingActionButton_add)
-        add_button.setOnClickListener(object: View.OnClickListener {
+        add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View): Unit {
                 val intent = Intent(context, AuthorAddActivity::class.java);
                 startActivity(intent);
@@ -45,8 +49,7 @@ class AuthorListFragment : Fragment() {
         if (adapter == null) {
             adapter = AuthorAdapter(authors)
             recyclerView!!.adapter = adapter
-        }
-        else
+        } else
             adapter!!.notifyDataSetChanged()
     }
 
@@ -55,7 +58,8 @@ class AuthorListFragment : Fragment() {
         updateUI()
     }
 
-    private class AuthorHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
+    private class AuthorHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!),
+        View.OnClickListener {
         var author_id: TextView = itemView!!.findViewById(R.id.author_id)
         var author_firstName: TextView = itemView!!.findViewById(R.id.author_firstName)
         var author_lastName: TextView = itemView!!.findViewById(R.id.author_lastName)

@@ -17,11 +17,11 @@ import kotlin.system.exitProcess
 
 
 class PublisherAddActivity : AppCompatActivity() {
-    lateinit var namePublisher_input : EditText
-    lateinit var address_input : EditText
-    lateinit var site_input : EditText
+    lateinit var namePublisher_input: EditText
+    lateinit var address_input: EditText
+    lateinit var site_input: EditText
 
-    lateinit var add_button : Button
+    lateinit var add_button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +36,17 @@ class PublisherAddActivity : AppCompatActivity() {
         add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
                 publishersApi.postPublisher(addPublisher()).enqueue(object : Callback<Publishers> {
-                    override fun onResponse(call: Call<Publishers>, response: Response<Publishers>) {
+                    override fun onResponse(
+                        call: Call<Publishers>,
+                        response: Response<Publishers>
+                    ) {
                         println("Передано")
                         GlobalScope.launch {
                             Connection.updatePublishers()
                             exitProcess(0)
                         }
                     }
+
                     override fun onFailure(call: Call<Publishers>, t: Throwable) {
                         println("Ошибка")
                         t.printStackTrace()
@@ -53,7 +57,8 @@ class PublisherAddActivity : AppCompatActivity() {
     }
 
     fun addPublisher(): Publishers {
-        return Publishers(0,
+        return Publishers(
+            0,
             namePublisher_input.text.toString(),
             address_input.text.toString(),
             site_input.text.toString()

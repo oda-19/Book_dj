@@ -22,15 +22,15 @@ object Connection {
     val publishersApi = retrofit.create(PublishersApi::class.java)
 
     fun updateBooks(): List<Books> {
-        books = booksApi.getBooks().execute().body()?: emptyList<Books>()
+        books = booksApi.getBooks().execute().body() ?: emptyList<Books>()
         return books
     }
     fun updateAuthors(): List<Authors> {
-        authors = authorsApi.getAuthors().execute().body()?: emptyList<Authors>()
+        authors = authorsApi.getAuthors().execute().body() ?: emptyList<Authors>()
         return authors
     }
     fun updatePublishers(): List<Publishers> {
-        publishers = publishersApi.getPublishers().execute().body()?: emptyList<Publishers>()
+        publishers = publishersApi.getPublishers().execute().body() ?: emptyList<Publishers>()
         return publishers
     }
 

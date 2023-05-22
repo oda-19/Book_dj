@@ -45,7 +45,11 @@ class AuthorFragment : Fragment() {
         author = Connection.authors.find { authors -> authors.id == authorId }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val v = inflater.inflate(R.layout.activity_update_author, container, false)
 
         id_update = v.findViewById(R.id.id_update_author)
@@ -58,9 +62,11 @@ class AuthorFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 author?.firstName = s.toString()
             }
+
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -72,9 +78,11 @@ class AuthorFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 author?.lastName = s.toString()
             }
+
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -82,19 +90,21 @@ class AuthorFragment : Fragment() {
 
         v.findViewById<Button>(R.id.delete_button).setOnClickListener {
             GlobalScope.launch {
-                authorsApi.deleteAuthor(id_update.text.toString().toInt()).enqueue(object : Callback<Unit> {
-                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                        println("Передано")
-                        GlobalScope.launch {
-                            Connection.updateAuthors()
-                            exitProcess(0)
+                authorsApi.deleteAuthor(id_update.text.toString().toInt())
+                    .enqueue(object : Callback<Unit> {
+                        override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                            println("Передано")
+                            GlobalScope.launch {
+                                Connection.updateAuthors()
+                                exitProcess(0)
+                            }
                         }
-                    }
-                    override fun onFailure(call: Call<Unit>, t: Throwable) {
-                        println("Ошибка")
-                        t.printStackTrace()
-                    }
-                })
+
+                        override fun onFailure(call: Call<Unit>, t: Throwable) {
+                            println("Ошибка")
+                            t.printStackTrace()
+                        }
+                    })
             }
         }
 
@@ -110,6 +120,7 @@ class AuthorFragment : Fragment() {
                             exitProcess(0)
                         }
                     }
+
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
                         println("Ошибка")
                         t.printStackTrace()

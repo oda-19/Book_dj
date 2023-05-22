@@ -18,7 +18,11 @@ class PublisherListFragment : Fragment() {
     private var adapter: PublisherAdapter? = null
     lateinit var add_button: FloatingActionButton
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View = inflater.inflate(R.layout.fragment_list, container, false)
 
         recyclerView = view.findViewById(R.id.recyclerView)
@@ -27,7 +31,7 @@ class PublisherListFragment : Fragment() {
         updateUI()
 
         add_button = view.findViewById(R.id.floatingActionButton_add)
-        add_button.setOnClickListener(object: View.OnClickListener {
+        add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View): Unit {
                 val intent = Intent(context, PublisherAddActivity::class.java);
                 startActivity(intent);
@@ -45,8 +49,7 @@ class PublisherListFragment : Fragment() {
         if (adapter == null) {
             adapter = PublisherAdapter(publishers)
             recyclerView!!.adapter = adapter
-        }
-        else
+        } else
             adapter!!.notifyDataSetChanged()
     }
 
@@ -55,9 +58,11 @@ class PublisherListFragment : Fragment() {
         updateUI()
     }
 
-    private class PublisherHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
+    private class PublisherHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!),
+        View.OnClickListener {
         var publisher_id: TextView = itemView!!.findViewById(R.id.publisher_id)
-        var publisher_namePublisher: TextView = itemView!!.findViewById(R.id.publisher_namePublisher)
+        var publisher_namePublisher: TextView =
+            itemView!!.findViewById(R.id.publisher_namePublisher)
         var publisher_address: TextView = itemView!!.findViewById(R.id.publisher_address)
 
         private lateinit var publisher: Publishers
@@ -77,7 +82,8 @@ class PublisherListFragment : Fragment() {
         }
     }
 
-    private class PublisherAdapter(publishers: List<Publishers>?) : RecyclerView.Adapter<PublisherHolder?>() {
+    private class PublisherAdapter(publishers: List<Publishers>?) :
+        RecyclerView.Adapter<PublisherHolder?>() {
         private var publishers: List<Publishers>? = null
 
         init {

@@ -41,13 +41,15 @@ class PublisherFragment : Fragment() {
     private lateinit var site_update: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super. onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState)
         val publisherId = requireArguments().getSerializable(ARG_PUBLISHER_ID) as Int
         publisher = Connection.publishers.find { publishers -> publishers.id == publisherId }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container:
-    ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container:
+        ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
         val v = inflater.inflate(R.layout.activity_update_publisher, container, false)
 
         id_update = v.findViewById(R.id.id_update_publisher)
@@ -60,9 +62,11 @@ class PublisherFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 publisher?.namePublisher = s.toString()
             }
+
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -74,9 +78,11 @@ class PublisherFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 publisher?.address = s.toString()
             }
+
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -88,9 +94,11 @@ class PublisherFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 publisher?.site = s.toString()
             }
+
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -98,19 +106,21 @@ class PublisherFragment : Fragment() {
 
         v.findViewById<Button>(R.id.delete_button).setOnClickListener {
             GlobalScope.launch {
-                publishersApi.deletePublisher(id_update.text.toString().toInt()).enqueue(object : Callback<Unit> {
-                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                        println("Передано")
-                        GlobalScope.launch {
-                            Connection.updatePublishers()
-                            exitProcess(0)
+                publishersApi.deletePublisher(id_update.text.toString().toInt())
+                    .enqueue(object : Callback<Unit> {
+                        override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                            println("Передано")
+                            GlobalScope.launch {
+                                Connection.updatePublishers()
+                                exitProcess(0)
+                            }
                         }
-                    }
-                    override fun onFailure(call: Call<Unit>, t: Throwable) {
-                        println("Ошибка")
-                        t.printStackTrace()
-                    }
-                })
+
+                        override fun onFailure(call: Call<Unit>, t: Throwable) {
+                            println("Ошибка")
+                            t.printStackTrace()
+                        }
+                    })
             }
         }
 
@@ -126,6 +136,7 @@ class PublisherFragment : Fragment() {
                             exitProcess(0)
                         }
                     }
+
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
                         println("Ошибка")
                         t.printStackTrace()

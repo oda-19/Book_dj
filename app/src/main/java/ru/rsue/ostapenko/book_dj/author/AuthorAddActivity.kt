@@ -16,10 +16,10 @@ import kotlin.system.exitProcess
 
 
 class AuthorAddActivity : AppCompatActivity() {
-    lateinit var firstName_input : EditText
-    lateinit var lastName_input : EditText
+    lateinit var firstName_input: EditText
+    lateinit var lastName_input: EditText
 
-    lateinit var add_button : Button
+    lateinit var add_button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +40,7 @@ class AuthorAddActivity : AppCompatActivity() {
                             exitProcess(0)
                         }
                     }
+
                     override fun onFailure(call: Call<Authors>, t: Throwable) {
                         println("Ошибка")
                         t.printStackTrace()
@@ -50,7 +51,8 @@ class AuthorAddActivity : AppCompatActivity() {
     }
 
     fun getAuthor(): Authors {
-        return Authors(0,
+        return Authors(
+            0,
             firstName_input.text.toString(),
             lastName_input.text.toString()
         )

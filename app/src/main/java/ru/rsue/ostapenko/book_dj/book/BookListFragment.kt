@@ -19,7 +19,11 @@ class BookListFragment : Fragment() {
     private var adapter: BookAdapter? = null
     lateinit var add_button: FloatingActionButton
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View = inflater.inflate(R.layout.fragment_list, container, false)
 
         recyclerView = view.findViewById(R.id.recyclerView)
@@ -28,7 +32,7 @@ class BookListFragment : Fragment() {
         updateUI()
 
         add_button = view.findViewById(R.id.floatingActionButton_add)
-        add_button.setOnClickListener(object: View.OnClickListener {
+        add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View): Unit {
                 val intent = Intent(context, BookAddActivity::class.java);
                 startActivity(intent);
@@ -46,8 +50,7 @@ class BookListFragment : Fragment() {
         if (adapter == null) {
             adapter = BookAdapter(books)
             recyclerView!!.adapter = adapter
-        }
-        else
+        } else
             adapter!!.notifyDataSetChanged()
     }
 
@@ -56,7 +59,8 @@ class BookListFragment : Fragment() {
         updateUI()
     }
 
-    private class BookHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!), View.OnClickListener {
+    private class BookHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!),
+        View.OnClickListener {
         var book_id: TextView = itemView!!.findViewById(R.id.book_id)
         var book_title: TextView = itemView!!.findViewById(R.id.book_title)
         var book_author: TextView = itemView!!.findViewById(R.id.book_author)
@@ -68,7 +72,8 @@ class BookListFragment : Fragment() {
             this.book = book
             book_id.text = book.id.toString()
             book_title.text = book.title
-            book_author.text = Connection.authors.find { authors -> authors.id == book.authorId }.toString()
+            book_author.text =
+                Connection.authors.find { authors -> authors.id == book.authorId }.toString()
             book_status.setChecked(book.status)
             itemView.setOnClickListener(this)
         }

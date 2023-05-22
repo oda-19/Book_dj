@@ -24,6 +24,7 @@
             android:name=".author.AuthorAddActivity"
             android:label="Авторы"
             android:parentActivityName=".author.AuthorListActivity" />
+
         <activity
             android:name=".publisher.PublisherListActivity"
             android:label="Издательства" />
@@ -35,6 +36,7 @@
             android:name=".publisher.PublisherAddActivity"
             android:label="Издательства"
             android:parentActivityName=".publisher.PublisherListActivity" />
+
         <activity
             android:name=".book.BookListActivity"
             android:label="Книги" />

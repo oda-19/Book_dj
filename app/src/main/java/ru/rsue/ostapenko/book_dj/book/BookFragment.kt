@@ -56,7 +56,11 @@ class BookFragment : Fragment() {
         book = Connection.books.find { books -> books.id == bookId }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val v = inflater.inflate(R.layout.activity_update_book, container, false)
 
         id_update = v.findViewById(R.id.id_update_book)
@@ -69,9 +73,11 @@ class BookFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 book?.code = s.toString()
             }
+
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -83,9 +89,11 @@ class BookFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 book?.title = s.toString()
             }
+
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -98,9 +106,11 @@ class BookFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 book?.yearPublish = s.toString().toInt()
             }
+
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -113,9 +123,11 @@ class BookFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 book?.countPage = s.toString().toInt()
             }
+
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -127,9 +139,11 @@ class BookFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 book?.hardcover = s.toString()
             }
+
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -141,9 +155,11 @@ class BookFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
+
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 book?.abstract = s.toString()
             }
+
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -157,19 +173,21 @@ class BookFragment : Fragment() {
 
         v.findViewById<Button>(R.id.delete_button).setOnClickListener {
             GlobalScope.launch {
-                booksApi.deleteBook(id_update.text.toString().toInt()).enqueue(object : Callback<Unit> {
-                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                        println("Передано")
-                        GlobalScope.launch {
-                            Connection.updateBooks()
-                            exitProcess(0)
+                booksApi.deleteBook(id_update.text.toString().toInt())
+                    .enqueue(object : Callback<Unit> {
+                        override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                            println("Передано")
+                            GlobalScope.launch {
+                                Connection.updateBooks()
+                                exitProcess(0)
+                            }
                         }
-                    }
-                    override fun onFailure(call: Call<Unit>, t: Throwable) {
-                        println("Ошибка")
-                        t.printStackTrace()
-                    }
-                })
+
+                        override fun onFailure(call: Call<Unit>, t: Throwable) {
+                            println("Ошибка")
+                            t.printStackTrace()
+                        }
+                    })
             }
         }
 
@@ -177,28 +195,38 @@ class BookFragment : Fragment() {
         publishId_update = v.findViewById(R.id.publishId_update)
 
         authorId_update.adapter =
-            ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, Connection.authors)
-                .apply{ setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
+            ArrayAdapter(
+                this.requireContext(),
+                android.R.layout.simple_spinner_item,
+                Connection.authors
+            )
+                .apply { setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
 
         authorId_update.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     author_select = Connection.authors[p2]
                 }
+
                 override fun onNothingSelected(p0: AdapterView<*>?) {
                     //
                 }
             }
 
         publishId_update.adapter =
-            ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, Connection.publishers)
-                .apply{ setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
+            ArrayAdapter(
+                this.requireContext(),
+                android.R.layout.simple_spinner_item,
+                Connection.publishers
+            )
+                .apply { setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
 
         publishId_update.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     publish_select = Connection.publishers[p2]
                 }
+
                 override fun onNothingSelected(p0: AdapterView<*>?) {
                     //
                 }
@@ -215,6 +243,7 @@ class BookFragment : Fragment() {
                             exitProcess(0)
                         }
                     }
+
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
                         println("Ошибка")
                         t.printStackTrace()

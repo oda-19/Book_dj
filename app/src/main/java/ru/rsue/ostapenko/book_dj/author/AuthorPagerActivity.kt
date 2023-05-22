@@ -44,10 +44,12 @@ class AuthorPagerActivity : AppCompatActivity() {
             }
     }
 
-    private class ViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+    private class ViewPagerAdapter(fragmentActivity: FragmentActivity) :
+        FragmentStateAdapter(fragmentActivity) {
         private val authors: List<Authors> = Connection.authorsBeauty()
 
         override fun getItemCount() = authors.size
-        override fun createFragment(position: Int) = AuthorFragment.newInstance(authors[position].id)
+        override fun createFragment(position: Int) =
+            AuthorFragment.newInstance(authors[position].id)
     }
 }
