@@ -23,4 +23,9 @@
         android:label="Издательства"
         tools:layout="@layout/fragment_list" />
 
+    <fragment
+        android:id="@+id/nav_login"
+        android:label="Войти"
+        tools:layout="@layout/login_fragment" />
+
 </navigation>

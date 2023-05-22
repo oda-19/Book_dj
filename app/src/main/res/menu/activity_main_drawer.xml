@@ -3,19 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_book"
-            android:icon="@drawable/inc_book"
-            android:title="Книги" />
-        <item
-            android:id="@+id/nav_author"
-            android:icon="@drawable/inc_author"
-            android:title="Авторы" />
-        <item
-            android:id="@+id/nav_publisher"
-            android:icon="@drawable/inc_publisher"
-            android:title="Издательства" />
-    </group>
+    <item android:title="Списки">
+        <menu>
+            <item
+                android:id="@+id/nav_book"
+                android:icon="@drawable/inc_book"
+                android:title="Книги" />
+            <item
+                android:id="@+id/nav_author"
+                android:icon="@drawable/inc_author"
+                android:title="Авторы" />
+            <item
+                android:id="@+id/nav_publisher"
+                android:icon="@drawable/inc_publisher"
+                android:title="Издательства" />
+        </menu>
+    </item>
+
+    <item android:title="Профиль">
+        <menu>
+            <item
+                android:id="@+id/nav_login"
+                android:icon="@drawable/inc_login"
+                android:title="Вход" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/inc_logout"
+                android:title="Выход" />
+        </menu>
+    </item>
 
 </menu>
