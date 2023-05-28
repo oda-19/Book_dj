@@ -7,7 +7,7 @@ import ru.rsue.ostapenko.book_dj.author.Authors
 
 interface AuthorsApi {
     @GET("api/authors/")
-    fun getAuthors(): Call<List<Authors>>
+    fun getAuthors(@Header("Authorization") token: String = "ASdasdasdasda"): Call<List<Authors>>
 
     @POST("api/authors/")
     fun postAuthor(@Body authors: Authors): Call<Authors>

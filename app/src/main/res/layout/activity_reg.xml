@@ -69,7 +69,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/reg_text_button"
+            android:id="@+id/login_text_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"

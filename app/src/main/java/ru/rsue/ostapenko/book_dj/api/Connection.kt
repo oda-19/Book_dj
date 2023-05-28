@@ -2,6 +2,7 @@ package ru.rsue.ostapenko.book_dj.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import ru.rsue.ostapenko.book_dj.auth.token.Token
 import ru.rsue.ostapenko.book_dj.author.Authors
 import ru.rsue.ostapenko.book_dj.book.Books
 import ru.rsue.ostapenko.book_dj.publisher.Publishers
@@ -20,9 +21,10 @@ object Connection {
     val booksApi = retrofit.create(BooksApi::class.java)
     val authorsApi = retrofit.create(AuthorsApi::class.java)
     val publishersApi = retrofit.create(PublishersApi::class.java)
+    val authApi = retrofit.create(UserAuthApi::class.java)
 
     fun updateBooks(): List<Books> {
-        books = booksApi.getBooks().execute().body() ?: emptyList<Books>()
+        books = booksApi.getBooks(Token.TOKEN_HEADER).execute().body() ?: emptyList<Books>()
         return books
     }
     fun updateAuthors(): List<Authors> {

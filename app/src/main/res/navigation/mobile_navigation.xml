@@ -24,7 +24,14 @@
         tools:layout="@layout/fragment_list" />
 
     <fragment
+        android:id="@+id/nav_reg"
+        android:name="ru.rsue.ostapenko.book_dj.auth.reg.RegFragment"
+        android:label="Регистрация"
+        tools:layout="@layout/activity_reg" />
+
+    <fragment
         android:id="@+id/nav_login"
+        android:name="ru.rsue.ostapenko.book_dj.auth.login.LoginFragment"
         android:label="Войти"
         tools:layout="@layout/login_fragment" />
 

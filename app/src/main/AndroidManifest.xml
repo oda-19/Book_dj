@@ -24,7 +24,6 @@
             android:name=".author.AuthorAddActivity"
             android:label="Авторы"
             android:parentActivityName=".author.AuthorListActivity" />
-
         <activity
             android:name=".publisher.PublisherListActivity"
             android:label="Издательства" />
@@ -36,7 +35,6 @@
             android:name=".publisher.PublisherAddActivity"
             android:label="Издательства"
             android:parentActivityName=".publisher.PublisherListActivity" />
-
         <activity
             android:name=".book.BookListActivity"
             android:label="Книги" />
@@ -48,6 +46,14 @@
             android:name=".book.BookAddActivity"
             android:label="Книги"
             android:parentActivityName=".book.BookListActivity" />
+        <activity
+            android:name=".auth.reg.RegActivity"
+            android:label="Регистрация"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".auth.login.LoginActivity"
+            android:label="Авторизация"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
