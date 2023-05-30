@@ -12,6 +12,7 @@ import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.authorsApi
+import ru.rsue.ostapenko.book_dj.auth.token.Token
 import kotlin.system.exitProcess
 
 
@@ -32,7 +33,7 @@ class AuthorAddActivity : AppCompatActivity() {
         // Асинхронная передача значения на сервер
         add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                authorsApi.postAuthor(getAuthor()).enqueue(object : Callback<Authors> {
+                authorsApi.postAuthor(Token.tokenHeader(), getAuthor()).enqueue(object : Callback<Authors> {
                     override fun onResponse(call: Call<Authors>, response: Response<Authors>) {
                         println("Передано")
                         GlobalScope.launch {

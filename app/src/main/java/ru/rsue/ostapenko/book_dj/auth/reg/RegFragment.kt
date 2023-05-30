@@ -32,7 +32,7 @@ class RegFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val v = inflater.inflate(R.layout.activity_reg, container, false)
+        val v = inflater.inflate(R.layout.reg_fragment, container, false)
 
         email = v.findViewById(R.id.email_input)
         username = v.findViewById(R.id.login_input)

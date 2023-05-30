@@ -24,8 +24,8 @@
         <menu>
             <item
                 android:id="@+id/nav_reg"
-                android:icon="@drawable/inc_login"
-                android:title="Вход"/>
+                android:icon="@drawable/inc_reg"
+                android:title="Регистрация"/>
             <item
                 android:id="@+id/nav_logout"
                 android:icon="@drawable/inc_logout"

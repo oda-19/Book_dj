@@ -11,11 +11,11 @@ interface AuthorsApi {
     fun getAuthors(@Header("Authorization") token: String): Call<List<Authors>>
 
     @POST("api/authors/")
-    fun postAuthor(@Body authors: Authors): Call<Authors>
+    fun postAuthor(@Header("Authorization") token: String, @Body authors: Authors): Call<Authors>
 
     @DELETE("api/authors/{id}/")
-    fun deleteAuthor(@Path("id") authorId: Int): Call<Unit>
+    fun deleteAuthor(@Header("Authorization") token: String, @Path("id") authorId: Int): Call<Unit>
 
     @PUT("api/authors/{id}/")
-    fun putAuthor(@Path("id") authorId: Int, @Body authors: Authors): Call<Unit>
+    fun putAuthor(@Header("Authorization") token: String, @Path("id") authorId: Int, @Body authors: Authors): Call<Unit>
 }

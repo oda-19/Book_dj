@@ -17,6 +17,7 @@ import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.authorsApi
+import ru.rsue.ostapenko.book_dj.auth.token.Token
 import kotlin.system.exitProcess
 
 
@@ -90,7 +91,7 @@ class AuthorFragment : Fragment() {
 
         v.findViewById<Button>(R.id.delete_button).setOnClickListener {
             GlobalScope.launch {
-                authorsApi.deleteAuthor(id_update.text.toString().toInt())
+                authorsApi.deleteAuthor(Token.tokenHeader(),id_update.text.toString().toInt())
                     .enqueue(object : Callback<Unit> {
                         override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                             println("Передано")
@@ -111,7 +112,7 @@ class AuthorFragment : Fragment() {
         v.findViewById<Button>(R.id.update_button).setOnClickListener {
             GlobalScope.launch {
                 val (id, author) = getAuthor()
-                authorsApi.putAuthor(id, author).enqueue(object : Callback<Unit> {
+                authorsApi.putAuthor(Token.tokenHeader(), id, author).enqueue(object : Callback<Unit> {
                     override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                         println("Передано")
                         GlobalScope.launch {

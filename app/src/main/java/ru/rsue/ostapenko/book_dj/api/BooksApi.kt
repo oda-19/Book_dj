@@ -11,11 +11,11 @@ interface BooksApi {
     fun getBooks(@Header("Authorization") token: String): Call<List<Books>>
 
     @POST("api/books/")
-    fun postBook(@Body books: Books): Call<Books>
+    fun postBook(@Header("Authorization") token: String, @Body books: Books): Call<Books>
 
     @DELETE("api/books/{id}/")
-    fun deleteBook(@Path("id") bookId: Int): Call<Unit>
+    fun deleteBook(@Header("Authorization") token: String, @Path("id") bookId: Int): Call<Unit>
 
     @PUT("api/books/{id}/")
-    fun putBook(@Path("id") bookId: Int, @Body books: Books): Call<Unit>
+    fun putBook(@Header("Authorization") token: String, @Path("id") bookId: Int, @Body books: Books): Call<Unit>
 }

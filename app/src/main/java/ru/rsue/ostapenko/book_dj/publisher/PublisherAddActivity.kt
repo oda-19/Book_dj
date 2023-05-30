@@ -13,6 +13,7 @@ import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.publishersApi
+import ru.rsue.ostapenko.book_dj.auth.token.Token
 import kotlin.system.exitProcess
 
 
@@ -35,7 +36,7 @@ class PublisherAddActivity : AppCompatActivity() {
         // Асинхронная передача значения на сервер
         add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                publishersApi.postPublisher(addPublisher()).enqueue(object : Callback<Publishers> {
+                publishersApi.postPublisher(Token.tokenHeader(), addPublisher()).enqueue(object : Callback<Publishers> {
                     override fun onResponse(
                         call: Call<Publishers>,
                         response: Response<Publishers>
