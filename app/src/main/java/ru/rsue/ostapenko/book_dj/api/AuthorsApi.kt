@@ -2,12 +2,13 @@ package ru.rsue.ostapenko.book_dj.api
 
 import retrofit2.Call
 import retrofit2.http.*
+import ru.rsue.ostapenko.book_dj.auth.token.Token
 import ru.rsue.ostapenko.book_dj.author.Authors
 
 
 interface AuthorsApi {
     @GET("api/authors/")
-    fun getAuthors(@Header("Authorization") token: String = "ASdasdasdasda"): Call<List<Authors>>
+    fun getAuthors(@Header("WWW-Authenticate") token: String = Token.TOKEN_HEADER): Call<List<Authors>>
 
     @POST("api/authors/")
     fun postAuthor(@Body authors: Authors): Call<Authors>
