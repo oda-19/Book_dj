@@ -6,7 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.rsue.ostapenko.book_dj.auth.token.Token
+import ru.rsue.ostapenko.book_dj.auth.Token
 import ru.rsue.ostapenko.book_dj.author.Authors
 import ru.rsue.ostapenko.book_dj.book.Books
 import ru.rsue.ostapenko.book_dj.publisher.Publishers
@@ -29,7 +29,6 @@ object Connection {
         .client(okHttpClient.build())
         .build()
 
-
     val booksApi = retrofit.create(BooksApi::class.java)
     val authorsApi = retrofit.create(AuthorsApi::class.java)
     val publishersApi = retrofit.create(PublishersApi::class.java)
@@ -39,12 +38,10 @@ object Connection {
         books = booksApi.getBooks(Token.tokenHeader()).execute().body() ?: emptyList<Books>()
         return books
     }
-
     fun updateAuthors(): List<Authors> {
         authors = authorsApi.getAuthors(Token.tokenHeader()).execute().body() ?: emptyList<Authors>()
         return authors
     }
-
     fun updatePublishers(): List<Publishers> {
         publishers = publishersApi.getPublishers(Token.tokenHeader()).execute().body() ?: emptyList<Publishers>()
         return publishers
@@ -52,7 +49,6 @@ object Connection {
 
     fun authorsBeauty() =
         authors.filter { authors -> authors.id >= 0 }
-
     fun publisherBeauty() =
         publishers.filter { publishers -> publishers.id >= 0 }
 

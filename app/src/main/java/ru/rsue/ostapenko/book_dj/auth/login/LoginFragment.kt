@@ -19,8 +19,9 @@ import ru.rsue.ostapenko.book_dj.MainActivity
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.auth.reg.RegActivity
-import ru.rsue.ostapenko.book_dj.auth.token.Token
+import ru.rsue.ostapenko.book_dj.auth.Token
 import ru.rsue.ostapenko.book_dj.auth.user.UserRequest
+
 
 class LoginFragment : Fragment() {
     lateinit var username: EditText
@@ -63,11 +64,9 @@ class LoginFragment : Fragment() {
                             Intent(activity, MainActivity::class.java)
                         )
                     }
-
                     override fun onFailure(call: Call<Token>, t: Throwable) {
                         Toast.makeText(context, "Error. Try later!", Toast.LENGTH_SHORT)
                     }
-
                 }
             )
         }

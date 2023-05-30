@@ -15,7 +15,7 @@ import ru.rsue.ostapenko.book_dj.MainActivity
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.authorsApi
-import ru.rsue.ostapenko.book_dj.auth.token.Token
+import ru.rsue.ostapenko.book_dj.auth.Token
 
 
 class AuthorAddActivity : AppCompatActivity() {
@@ -49,7 +49,6 @@ class AuthorAddActivity : AppCompatActivity() {
                                 )
                             }
                         }
-
                         override fun onFailure(call: Call<Authors>, t: Throwable) {
                             println("Ошибка")
                             t.printStackTrace()

@@ -17,8 +17,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection.authApi
-import ru.rsue.ostapenko.book_dj.auth.user.User
 import ru.rsue.ostapenko.book_dj.auth.login.LoginActivity
+import ru.rsue.ostapenko.book_dj.auth.user.User
 
 
 class RegFragment : Fragment() {
@@ -63,7 +63,6 @@ class RegFragment : Fragment() {
                             Intent(activity, LoginActivity::class.java)
                         )
                     }
-
                     override fun onFailure(call: Call<User>, t: Throwable) {
                         Toast.makeText(context, "Error. Try later!", Toast.LENGTH_SHORT)
                     }

@@ -19,8 +19,7 @@ import ru.rsue.ostapenko.book_dj.MainActivity
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.publishersApi
-import ru.rsue.ostapenko.book_dj.auth.token.Token
-import kotlin.system.exitProcess
+import ru.rsue.ostapenko.book_dj.auth.Token
 
 
 // Контроллер, взаимодействующий с объектами модели и представления
@@ -109,23 +108,22 @@ class PublisherFragment : Fragment() {
 
         v.findViewById<Button>(R.id.delete_button).setOnClickListener {
             GlobalScope.launch {
-                publishersApi.deletePublisher(Token.tokenHeader(), id_update.text.toString().toInt())
-                    .enqueue(object : Callback<Unit> {
-                        override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                            println("Передано")
-                            GlobalScope.launch {
-                                Connection.updatePublishers()
-                                activity?.startActivity(
-                                    Intent(activity, MainActivity::class.java)
-                                )
-                            }
+                publishersApi.deletePublisher(Token.tokenHeader(), id_update.text.toString().toInt()
+                ).enqueue(object : Callback<Unit> {
+                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                        println("Передано")
+                        GlobalScope.launch {
+                            Connection.updatePublishers()
+                            activity?.startActivity(
+                                Intent(activity, MainActivity::class.java)
+                            )
                         }
-
-                        override fun onFailure(call: Call<Unit>, t: Throwable) {
-                            println("Ошибка")
-                            t.printStackTrace()
-                        }
-                    })
+                    }
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+                        println("Ошибка")
+                        t.printStackTrace()
+                    }
+                })
             }
         }
 
@@ -143,7 +141,6 @@ class PublisherFragment : Fragment() {
                             )
                         }
                     }
-
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
                         println("Ошибка")
                         t.printStackTrace()

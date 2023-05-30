@@ -1,4 +1,4 @@
-package ru.rsue.ostapenko.book_dj.auth.token
+package ru.rsue.ostapenko.book_dj.auth
 
 data class Token(
     val refresh: String,

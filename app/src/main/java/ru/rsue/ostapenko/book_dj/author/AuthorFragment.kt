@@ -19,8 +19,7 @@ import ru.rsue.ostapenko.book_dj.MainActivity
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.authorsApi
-import ru.rsue.ostapenko.book_dj.auth.token.Token
-import kotlin.system.exitProcess
+import ru.rsue.ostapenko.book_dj.auth.Token
 
 
 // Контроллер, взаимодействующий с объектами модели и представления
@@ -65,11 +64,9 @@ class AuthorFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 author?.firstName = s.toString()
             }
-
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -81,11 +78,9 @@ class AuthorFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 author?.lastName = s.toString()
             }
-
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -93,7 +88,7 @@ class AuthorFragment : Fragment() {
 
         v.findViewById<Button>(R.id.delete_button).setOnClickListener {
             GlobalScope.launch {
-                authorsApi.deleteAuthor(Token.tokenHeader(),id_update.text.toString().toInt())
+                authorsApi.deleteAuthor(Token.tokenHeader(), id_update.text.toString().toInt())
                     .enqueue(object : Callback<Unit> {
                         override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                             println("Передано")
@@ -104,7 +99,6 @@ class AuthorFragment : Fragment() {
                                 )
                             }
                         }
-
                         override fun onFailure(call: Call<Unit>, t: Throwable) {
                             println("Ошибка")
                             t.printStackTrace()
@@ -116,23 +110,23 @@ class AuthorFragment : Fragment() {
         v.findViewById<Button>(R.id.update_button).setOnClickListener {
             GlobalScope.launch {
                 val (id, author) = getAuthor()
-                authorsApi.putAuthor(Token.tokenHeader(), id, author).enqueue(object : Callback<Unit> {
-                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                        println("Передано")
-                        GlobalScope.launch {
-                            Connection.updateAuthors()
-                            Connection.updateBooks()
-                            activity?.startActivity(
-                                Intent(activity, MainActivity::class.java)
-                            )
+                authorsApi.putAuthor(Token.tokenHeader(), id, author)
+                    .enqueue(object : Callback<Unit> {
+                        override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                            println("Передано")
+                            GlobalScope.launch {
+                                Connection.updateAuthors()
+                                Connection.updateBooks()
+                                activity?.startActivity(
+                                    Intent(activity, MainActivity::class.java)
+                                )
+                            }
                         }
-                    }
-
-                    override fun onFailure(call: Call<Unit>, t: Throwable) {
-                        println("Ошибка")
-                        t.printStackTrace()
-                    }
-                })
+                        override fun onFailure(call: Call<Unit>, t: Throwable) {
+                            println("Ошибка")
+                            t.printStackTrace()
+                        }
+                    })
             }
         }
 

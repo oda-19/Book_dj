@@ -15,7 +15,7 @@ import ru.rsue.ostapenko.book_dj.MainActivity
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.publishersApi
-import ru.rsue.ostapenko.book_dj.auth.token.Token
+import ru.rsue.ostapenko.book_dj.auth.Token
 
 
 class PublisherAddActivity : AppCompatActivity() {
@@ -37,29 +37,24 @@ class PublisherAddActivity : AppCompatActivity() {
         // Асинхронная передача значения на сервер
         add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                publishersApi.postPublisher(Token.tokenHeader(), addPublisher())
-                    .enqueue(object : Callback<Publishers> {
-                        override fun onResponse(
-                            call: Call<Publishers>,
-                            response: Response<Publishers>
-                        ) {
-                            println("Передано")
-                            GlobalScope.launch {
-                                Connection.updatePublishers()
-                                startActivity(
-                                    Intent(
-                                        this@PublisherAddActivity,
-                                        MainActivity::class.java
-                                    )
-                                )
-                            }
+                publishersApi.postPublisher(Token.tokenHeader(), addPublisher()).enqueue(object : Callback<Publishers> {
+                    override fun onResponse(
+                        call: Call<Publishers>,
+                        response: Response<Publishers>
+                    ) {
+                        println("Передано")
+                        GlobalScope.launch {
+                            Connection.updatePublishers()
+                            startActivity(
+                                Intent(this@PublisherAddActivity, MainActivity::class.java)
+                            )
                         }
-
-                        override fun onFailure(call: Call<Publishers>, t: Throwable) {
-                            println("Ошибка")
-                            t.printStackTrace()
-                        }
-                    })
+                    }
+                    override fun onFailure(call: Call<Publishers>, t: Throwable) {
+                        println("Ошибка")
+                        t.printStackTrace()
+                    }
+                })
             }
         })
     }

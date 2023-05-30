@@ -14,7 +14,7 @@ import ru.rsue.ostapenko.book_dj.MainActivity
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.booksApi
-import ru.rsue.ostapenko.book_dj.auth.token.Token
+import ru.rsue.ostapenko.book_dj.auth.Token
 import ru.rsue.ostapenko.book_dj.author.Authors
 import ru.rsue.ostapenko.book_dj.publisher.Publishers
 
@@ -61,7 +61,6 @@ class BookAddActivity : AppCompatActivity() {
                             startActivity(Intent(this@BookAddActivity, MainActivity::class.java))
                         }
                     }
-
                     override fun onFailure(call: Call<Books>, t: Throwable) {
                         println("Ошибка")
                         t.printStackTrace()
@@ -78,7 +77,6 @@ class BookAddActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 author_select = Connection.authorsBeauty()[p2]
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 //
             }
@@ -92,7 +90,6 @@ class BookAddActivity : AppCompatActivity() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 publish_select = Connection.publisherBeauty()[p2]
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 //
             }

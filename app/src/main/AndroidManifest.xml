@@ -13,6 +13,7 @@
         android:theme="@style/Theme.Book_dj"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:name=".author.AuthorListActivity"
             android:label="Авторы" />
@@ -24,6 +25,7 @@
             android:name=".author.AuthorAddActivity"
             android:label="Авторы"
             android:parentActivityName=".author.AuthorListActivity" />
+
         <activity
             android:name=".publisher.PublisherListActivity"
             android:label="Издательства" />
@@ -35,10 +37,11 @@
             android:name=".publisher.PublisherAddActivity"
             android:label="Издательства"
             android:parentActivityName=".publisher.PublisherListActivity" />
+
         <activity
             android:name=".book.BookListActivity"
             android:label="Книги"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".book.BookPagerActivity"
             android:label="Книги"
@@ -47,6 +50,7 @@
             android:name=".book.BookAddActivity"
             android:label="Книги"
             android:parentActivityName=".book.BookListActivity" />
+
         <activity
             android:name=".auth.reg.RegActivity"
             android:label="Регистрация"
@@ -58,6 +62,7 @@
         <activity
             android:name=".auth.logout.LogoutActivity"
             android:parentActivityName=".MainActivity" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

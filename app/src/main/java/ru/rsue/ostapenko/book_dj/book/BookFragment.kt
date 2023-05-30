@@ -18,10 +18,9 @@ import ru.rsue.ostapenko.book_dj.MainActivity
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.booksApi
-import ru.rsue.ostapenko.book_dj.auth.token.Token
+import ru.rsue.ostapenko.book_dj.auth.Token
 import ru.rsue.ostapenko.book_dj.author.Authors
 import ru.rsue.ostapenko.book_dj.publisher.Publishers
-import kotlin.system.exitProcess
 
 
 // Контроллер, взаимодействующий с объектами модели и представления
@@ -76,11 +75,9 @@ class BookFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 book?.code = s.toString()
             }
-
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -92,11 +89,9 @@ class BookFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 book?.title = s.toString()
             }
-
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -109,11 +104,9 @@ class BookFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 book?.yearPublish = s.toString().toInt()
             }
-
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -126,11 +119,9 @@ class BookFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 book?.countPage = s.toString().toInt()
             }
-
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -142,11 +133,9 @@ class BookFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 book?.hardcover = s.toString()
             }
-
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -158,11 +147,9 @@ class BookFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 //
             }
-
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 book?.abstract = s.toString()
             }
-
             override fun afterTextChanged(c: Editable) {
                 //
             }
@@ -187,7 +174,6 @@ class BookFragment : Fragment() {
                                 )
                             }
                         }
-
                         override fun onFailure(call: Call<Unit>, t: Throwable) {
                             println("Ошибка")
                             t.printStackTrace()
@@ -212,7 +198,6 @@ class BookFragment : Fragment() {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     author_select = Connection.authors[p2]
                 }
-
                 override fun onNothingSelected(p0: AdapterView<*>?) {
                     //
                 }
@@ -231,7 +216,6 @@ class BookFragment : Fragment() {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     publish_select = Connection.publishers[p2]
                 }
-
                 override fun onNothingSelected(p0: AdapterView<*>?) {
                     //
                 }
@@ -250,7 +234,6 @@ class BookFragment : Fragment() {
                             )
                         }
                     }
-
                     override fun onFailure(call: Call<Unit>, t: Throwable) {
                         println("Ошибка")
                         t.printStackTrace()
