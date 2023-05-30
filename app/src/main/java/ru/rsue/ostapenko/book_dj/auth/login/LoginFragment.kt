@@ -1,5 +1,6 @@
 package ru.rsue.ostapenko.book_dj.auth.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +14,12 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import ru.rsue.ostapenko.book_dj.MainActivity
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.auth.token.Token
 import ru.rsue.ostapenko.book_dj.auth.user.UserRequest
+import ru.rsue.ostapenko.book_dj.book.BookListActivity
 
 class LoginFragment : Fragment() {
     lateinit var username: EditText
@@ -48,6 +51,10 @@ class LoginFragment : Fragment() {
                 object : Callback<Token> {
                     override fun onResponse(call: Call<Token>, response: Response<Token>) {
                         Token.TOKEN = response.body() ?: Token.TOKEN
+                        Connection.update()
+                        activity?.startActivity(
+                            Intent(activity, MainActivity::class.java)
+                        )
                     }
 
                     override fun onFailure(call: Call<Token>, t: Throwable) {

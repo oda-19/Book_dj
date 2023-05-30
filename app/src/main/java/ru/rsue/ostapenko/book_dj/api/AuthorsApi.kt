@@ -8,7 +8,7 @@ import ru.rsue.ostapenko.book_dj.author.Authors
 
 interface AuthorsApi {
     @GET("api/authors/")
-    fun getAuthors(@Header("WWW-Authenticate") token: String = Token.TOKEN_HEADER): Call<List<Authors>>
+    fun getAuthors(@Header("Authorization") token: String): Call<List<Authors>>
 
     @POST("api/authors/")
     fun postAuthor(@Body authors: Authors): Call<Authors>

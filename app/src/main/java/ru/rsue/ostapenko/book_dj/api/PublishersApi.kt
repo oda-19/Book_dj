@@ -7,7 +7,7 @@ import ru.rsue.ostapenko.book_dj.publisher.Publishers
 
 interface PublishersApi {
     @GET("api/publishers/")
-    fun getPublishers(): Call<List<Publishers>>
+    fun getPublishers(@Header("Authorization") token: String): Call<List<Publishers>>
 
     @POST("api/publishers/")
     fun postPublisher(@Body publishers: Publishers): Call<Publishers>

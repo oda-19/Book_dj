@@ -6,6 +6,6 @@ data class Token(
 ) {
     companion object {
         var TOKEN: Token = Token("", "")
-        var TOKEN_HEADER = "Bearer ${TOKEN.access}"
+        fun tokenHeader(): String = "Bearer ${TOKEN.access}"
     }
 }

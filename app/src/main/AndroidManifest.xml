@@ -37,7 +37,8 @@
             android:parentActivityName=".publisher.PublisherListActivity" />
         <activity
             android:name=".book.BookListActivity"
-            android:label="Книги" />
+            android:label="Книги"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".book.BookPagerActivity"
             android:label="Книги"
@@ -53,6 +54,9 @@
         <activity
             android:name=".auth.login.LoginActivity"
             android:label="Авторизация"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".auth.logout.LogoutActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"

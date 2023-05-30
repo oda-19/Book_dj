@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_login">
+    app:startDestination="@+id/nav_book">
 
     <fragment
         android:id="@+id/nav_book"
@@ -34,5 +34,10 @@
         android:name="ru.rsue.ostapenko.book_dj.auth.login.LoginFragment"
         android:label="Войти"
         tools:layout="@layout/login_fragment" />
+
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="ru.rsue.ostapenko.book_dj.auth.logout.LogoutFragment"
+        tools:layout="@layout/logout_fragment" />
 
 </navigation>
