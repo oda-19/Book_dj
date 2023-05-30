@@ -1,5 +1,6 @@
 package ru.rsue.ostapenko.book_dj.publisher
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -10,11 +11,11 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import ru.rsue.ostapenko.book_dj.MainActivity
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.publishersApi
 import ru.rsue.ostapenko.book_dj.auth.token.Token
-import kotlin.system.exitProcess
 
 
 class PublisherAddActivity : AppCompatActivity() {
@@ -36,23 +37,29 @@ class PublisherAddActivity : AppCompatActivity() {
         // Асинхронная передача значения на сервер
         add_button.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-                publishersApi.postPublisher(Token.tokenHeader(), addPublisher()).enqueue(object : Callback<Publishers> {
-                    override fun onResponse(
-                        call: Call<Publishers>,
-                        response: Response<Publishers>
-                    ) {
-                        println("Передано")
-                        GlobalScope.launch {
-                            Connection.updatePublishers()
-                            exitProcess(0)
+                publishersApi.postPublisher(Token.tokenHeader(), addPublisher())
+                    .enqueue(object : Callback<Publishers> {
+                        override fun onResponse(
+                            call: Call<Publishers>,
+                            response: Response<Publishers>
+                        ) {
+                            println("Передано")
+                            GlobalScope.launch {
+                                Connection.updatePublishers()
+                                startActivity(
+                                    Intent(
+                                        this@PublisherAddActivity,
+                                        MainActivity::class.java
+                                    )
+                                )
+                            }
                         }
-                    }
 
-                    override fun onFailure(call: Call<Publishers>, t: Throwable) {
-                        println("Ошибка")
-                        t.printStackTrace()
-                    }
-                })
+                        override fun onFailure(call: Call<Publishers>, t: Throwable) {
+                            println("Ошибка")
+                            t.printStackTrace()
+                        }
+                    })
             }
         })
     }

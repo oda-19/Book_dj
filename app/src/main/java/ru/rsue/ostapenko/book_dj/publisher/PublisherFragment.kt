@@ -1,5 +1,6 @@
 package ru.rsue.ostapenko.book_dj.publisher
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import ru.rsue.ostapenko.book_dj.MainActivity
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.publishersApi
@@ -113,7 +115,9 @@ class PublisherFragment : Fragment() {
                             println("Передано")
                             GlobalScope.launch {
                                 Connection.updatePublishers()
-                                exitProcess(0)
+                                activity?.startActivity(
+                                    Intent(activity, MainActivity::class.java)
+                                )
                             }
                         }
 
@@ -134,7 +138,9 @@ class PublisherFragment : Fragment() {
                         GlobalScope.launch {
                             Connection.updatePublishers()
                             Connection.updateBooks()
-                            exitProcess(0)
+                            activity?.startActivity(
+                                Intent(activity, MainActivity::class.java)
+                            )
                         }
                     }
 

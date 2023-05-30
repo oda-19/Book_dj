@@ -1,26 +1,22 @@
 package ru.rsue.ostapenko.book_dj.book
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import ru.rsue.ostapenko.book_dj.MainActivity
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.booksApi
 import ru.rsue.ostapenko.book_dj.auth.token.Token
 import ru.rsue.ostapenko.book_dj.author.Authors
 import ru.rsue.ostapenko.book_dj.publisher.Publishers
-import kotlin.system.exitProcess
 
 
 class BookAddActivity : AppCompatActivity() {
@@ -62,7 +58,7 @@ class BookAddActivity : AppCompatActivity() {
                         println("Передано")
                         GlobalScope.launch {
                             Connection.updateBooks()
-                            exitProcess(0)
+                            startActivity(Intent(this@BookAddActivity, MainActivity::class.java))
                         }
                     }
 
@@ -74,35 +70,33 @@ class BookAddActivity : AppCompatActivity() {
             }
         })
 
-        authorId_input.adapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item, Connection.authorsBeauty())
-                .apply { setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
+        authorId_input.adapter = ArrayAdapter(
+            this, android.R.layout.simple_spinner_item, Connection.authorsBeauty()
+        ).apply { setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
 
-        authorId_input.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    author_select = Connection.authorsBeauty()[p2]
-                }
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-                    //
-                }
+        authorId_input.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                author_select = Connection.authorsBeauty()[p2]
             }
 
-        publishId_input.adapter =
-            ArrayAdapter(this, android.R.layout.simple_spinner_item, Connection.publisherBeauty())
-                .apply { setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
-
-        publishId_input.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    publish_select = Connection.publisherBeauty()[p2]
-                }
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-                    //
-                }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                //
             }
+        }
+
+        publishId_input.adapter = ArrayAdapter(
+            this, android.R.layout.simple_spinner_item, Connection.publisherBeauty()
+        ).apply { setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
+
+        publishId_input.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                publish_select = Connection.publisherBeauty()[p2]
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                //
+            }
+        }
     }
 
     fun getBook(): Books {

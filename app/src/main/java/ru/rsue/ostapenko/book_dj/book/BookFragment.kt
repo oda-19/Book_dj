@@ -1,5 +1,6 @@
 package ru.rsue.ostapenko.book_dj.book
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,6 +14,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import ru.rsue.ostapenko.book_dj.MainActivity
 import ru.rsue.ostapenko.book_dj.R
 import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.api.Connection.booksApi
@@ -180,7 +182,9 @@ class BookFragment : Fragment() {
                             println("Передано")
                             GlobalScope.launch {
                                 Connection.updateBooks()
-                                exitProcess(0)
+                                activity?.startActivity(
+                                    Intent(activity, MainActivity::class.java)
+                                )
                             }
                         }
 
@@ -241,7 +245,9 @@ class BookFragment : Fragment() {
                         println("Передано")
                         GlobalScope.launch {
                             Connection.updateBooks()
-                            exitProcess(0)
+                            activity?.startActivity(
+                                Intent(activity, MainActivity::class.java)
+                            )
                         }
                     }
 

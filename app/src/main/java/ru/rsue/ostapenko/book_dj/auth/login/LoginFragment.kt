@@ -21,7 +21,6 @@ import ru.rsue.ostapenko.book_dj.api.Connection
 import ru.rsue.ostapenko.book_dj.auth.reg.RegActivity
 import ru.rsue.ostapenko.book_dj.auth.token.Token
 import ru.rsue.ostapenko.book_dj.auth.user.UserRequest
-import ru.rsue.ostapenko.book_dj.book.BookListActivity
 
 class LoginFragment : Fragment() {
     lateinit var username: EditText
